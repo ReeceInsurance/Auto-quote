@@ -14,7 +14,7 @@
       --muted:#9ca3af;
       --text:#f9fafb;
       --text-soft:#d1d5db;
-      --error:#fecaca;
+      --error:#fca5a5;
     }
     *{box-sizing:border-box;}
     html,body{height:100%;}
@@ -67,7 +67,7 @@
 
     /* Header */
     header{
-      margin-bottom:18px;
+      margin-bottom:16px;
     }
     .top-header{
       display:flex;
@@ -141,6 +141,33 @@
       background:rgba(22,163,74,0.3);
     }
 
+    /* Progress bar */
+    .progress-shell{
+      margin-bottom:14px;
+    }
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+    .progress-label strong{color:var(--text-soft);}
+    .progress-track{
+      width:100%;
+      height:6px;
+      border-radius:999px;
+      background:rgba(15,23,42,0.9);
+      overflow:hidden;
+    }
+    .progress-bar{
+      height:100%;
+      width:0%;
+      border-radius:999px;
+      background:linear-gradient(90deg,#3b82f6,#22c55e);
+      transition:width 0.25s ease;
+    }
+
     .layout{
       display:flex;
       gap:24px;
@@ -190,6 +217,7 @@
       min-width:0;
     }
 
+    /* Sections & fields */
     form{margin-top:4px;display:flex;flex-direction:column;gap:16px;}
     .section{
       border-radius:16px;
@@ -324,7 +352,7 @@
       padding:4px 10px;
       border:1px solid rgba(248,113,113,0.9);
       background:rgba(127,29,29,0.4);
-      color:var(--error);
+      color:#fecaca;
       font-size:11px;
       cursor:pointer;
     }
@@ -348,6 +376,7 @@
       display:flex;align-items:center;justify-content:center;font-size:12px;
     }
 
+    /* Buttons & status */
     .controls-bar{
       display:flex;
       gap:10px;
@@ -369,12 +398,31 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
     }
     .btn-primary span.icon{
       width:18px;height:18px;border-radius:999px;
       background:rgba(15,23,42,0.95);
       display:flex;align-items:center;justify-content:center;font-size:12px;
     }
+    .btn-primary:active{
+      transform:translateY(1px);
+      box-shadow:0 8px 16px rgba(37,99,235,0.6);
+    }
+    .btn-primary.sending{
+      opacity:0.85;
+      cursor:default;
+      box-shadow:0 8px 18px rgba(37,99,235,0.4);
+      animation:pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%{transform:translateY(0) scale(1);}
+      50%{transform:translateY(0) scale(1.02);}
+      100%{transform:translateY(0) scale(1);}
+    }
+
     .btn-ghost{
       border-radius:999px;
       padding:9px 14px;
@@ -392,15 +440,35 @@
     #status.error{color:var(--error);}
     #status.success{color:#bbf7d0;}
 
-    #successMessage{
+    .input-error{
+      border-color:var(--error) !important;
+      box-shadow:0 0 0 1px rgba(248,113,113,0.7) !important;
+    }
+
+    /* Success screen */
+    #successPanel{
       display:none;
-      margin-top:16px;
-      padding:14px 12px;
-      border-radius:14px;
-      border:1px solid rgba(34,197,94,0.8);
-      background:rgba(22,163,74,0.15);
-      font-size:14px;
+      padding:32px 18px 22px;
+      text-align:center;
+    }
+    .success-icon{
+      width:56px;height:56px;border-radius:999px;
+      margin:0 auto 14px;
+      border:2px solid #22c55e;
+      display:flex;align-items:center;justify-content:center;
       color:#bbf7d0;
+      font-size:28px;
+      background:rgba(22,163,74,0.18);
+      box-shadow:0 0 0 6px rgba(34,197,94,0.25);
+    }
+    #successPanel h2{
+      font-size:22px;
+      margin:0 0 8px;
+    }
+    #successPanel p{
+      margin:4px 0;
+      font-size:14px;
+      color:var(--text-soft);
     }
 
     .privacy-note{
@@ -453,6 +521,7 @@
       }
       .hero-text{text-align:left;}
       .hero-points{justify-content:flex-start;}
+      .progress-label{font-size:10px;}
     }
   </style>
 </head>
@@ -481,6 +550,17 @@
             <div class="corner-icon" aria-hidden="true">🏠</div>
           </div>
         </header>
+
+        <!-- Progress bar -->
+        <div class="progress-shell" aria-hidden="true">
+          <div class="progress-label">
+            <strong id="progressStep">Step 1 of 4</strong>
+            <span id="progressTitle">About you</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
 
         <div class="layout">
           <aside class="sidebar" aria-label="Form steps overview">
@@ -518,198 +598,209 @@
           </aside>
 
           <main class="main-form">
-            <form id="quoteForm" autocomplete="on">
-              <!-- Section 1: About you -->
-              <section class="section" aria-labelledby="section-about">
-                <div class="section-header">
-                  <div class="section-title">
-                    <div class="section-title-badge">1</div>
-                    <span id="section-about">About you</span>
-                  </div>
-                  <div class="section-tag">Basic information</div>
-                </div>
-                <div class="section-body">
-                  <div class="field-group">
-                    <label for="fullName">Full name</label>
-                    <input id="fullName" name="fullName" type="text" autocomplete="name" required />
-                  </div>
-
-                  <div class="field-group">
-                    <label for="street">Street address</label>
-                    <input id="street" name="street" type="text" autocomplete="street-address" required />
-                  </div>
-
-                  <div class="row">
-                    <div class="field-group col">
-                      <label for="city">City</label>
-                      <input id="city" name="city" type="text" required />
+            <!-- FORM WRAPPER -->
+            <div id="formWrapper">
+              <form id="quoteForm" autocomplete="on">
+                <!-- Section 1: About you -->
+                <section class="section" aria-labelledby="section-about" data-step="1" data-title="About you">
+                  <div class="section-header">
+                    <div class="section-title">
+                      <div class="section-title-badge">1</div>
+                      <span id="section-about">About you</span>
                     </div>
-                    <div class="field-group col">
-                      <label for="state">State</label>
-                      <input id="state" name="state" type="text" maxlength="2" placeholder="UT" required />
-                    </div>
-                    <div class="field-group col">
-                      <label for="zip">ZIP</label>
-                      <input id="zip" name="zip" type="text" inputmode="numeric" pattern="\d{5}(-\d{4})?" required />
-                    </div>
+                    <div class="section-tag">Basic information</div>
                   </div>
+                  <div class="section-body">
+                    <div class="field-group">
+                      <label for="fullName">Full name</label>
+                      <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+                    </div>
 
-                  <div class="row">
-                    <div class="field-group col">
-                      <label for="dob">Date of birth</label>
-                      <input id="dob" name="dob" type="date" required />
+                    <div class="field-group">
+                      <label for="street">Street address</label>
+                      <input id="street" name="street" type="text" autocomplete="street-address" required />
                     </div>
-                    <div class="field-group col">
-                      <label for="ownRent">Do you own or rent your home?</label>
-                      <select id="ownRent" name="ownRent" required>
-                        <option value="">Select one</option>
-                        <option>Own</option>
-                        <option>Rent</option>
-                      </select>
-                    </div>
-                  </div>
 
-                  <div class="field-group">
-                    <label for="drivers">Other household drivers (if any)</label>
-                    <textarea id="drivers" name="drivers" placeholder="Names, dates of birth, and license state for anyone else who drives your vehicles."></textarea>
-                    <div class="field-note">If you’re the only driver in the household, you can leave this blank.</div>
-                  </div>
-                </div>
-              </section>
-
-              <!-- Section 2: Vehicles (card-based) -->
-              <section class="section" aria-labelledby="section-vehicles">
-                <div class="section-header">
-                  <div class="section-title">
-                    <div class="section-title-badge">2</div>
-                    <span id="section-vehicles">Your vehicles</span>
-                  </div>
-                  <div class="section-tag">You can add more than one</div>
-                </div>
-                <div class="section-body">
-                  <div class="field-group">
-                    <div class="field-note">Fill in as much as you can. VIN is helpful but not required.</div>
-                    <div class="vehicles-shell" id="vehiclesShell">
-                      <!-- vehicle cards injected here -->
-                    </div>
-                    <button type="button" class="btn-soft" id="addVehicleBtn">
-                      <span class="icon">+</span>
-                      <span>Add another vehicle</span>
-                    </button>
-                  </div>
-                </div>
-              </section>
-
-              <!-- Section 3: Driving history -->
-              <section class="section" aria-labelledby="section-history">
-                <div class="section-header">
-                  <div class="section-title">
-                    <div class="section-title-badge">3</div>
-                    <span id="section-history">Driving history</span>
-                  </div>
-                  <div class="section-tag">Last 3 years</div>
-                </div>
-                <div class="section-body">
-                  <div class="row">
-                    <div class="field-group col">
-                      <label>Any tickets in the last 3 years?</label>
-                      <div class="inline-radio">
-                        <label><input type="radio" name="tickets" value="no" checked /> No</label>
-                        <label><input type="radio" name="tickets" value="yes" /> Yes</label>
+                    <div class="row">
+                      <div class="field-group col">
+                        <label for="city">City</label>
+                        <input id="city" name="city" type="text" required />
+                      </div>
+                      <div class="field-group col">
+                        <label for="state">State</label>
+                        <input id="state" name="state" type="text" maxlength="2" placeholder="UT" required />
+                      </div>
+                      <div class="field-group col">
+                        <label for="zip">ZIP</label>
+                        <input id="zip" name="zip" type="text" inputmode="numeric" pattern="\d{5}(-\d{4})?" required />
                       </div>
                     </div>
-                    <div class="field-group col">
-                      <label>Any accidents in the last 3 years?</label>
-                      <div class="inline-radio">
-                        <label><input type="radio" name="accidents" value="no" checked /> No</label>
-                        <label><input type="radio" name="accidents" value="yes" /> Yes</label>
+
+                    <div class="row">
+                      <div class="field-group col">
+                        <label for="dob">Date of birth</label>
+                        <input id="dob" name="dob" type="date" required />
+                      </div>
+                      <div class="field-group col">
+                        <label for="ownRent">Do you own or rent your home?</label>
+                        <select id="ownRent" name="ownRent" required>
+                          <option value="">Select one</option>
+                          <option>Own</option>
+                          <option>Rent</option>
+                        </select>
                       </div>
                     </div>
-                  </div>
 
-                  <div class="field-group">
-                    <label for="violDetails">If yes, please share brief details</label>
-                    <textarea id="violDetails" name="violDetails" placeholder="Dates, what happened, and who was at fault (if known)."></textarea>
+                    <div class="field-group">
+                      <label for="drivers">Other household drivers (if any)</label>
+                      <textarea id="drivers" name="drivers" placeholder="Names, dates of birth, and license state for anyone else who drives your vehicles."></textarea>
+                      <div class="field-note">If you’re the only driver in the household, you can leave this blank.</div>
+                    </div>
                   </div>
+                </section>
+
+                <!-- Section 2: Vehicles (card-based) -->
+                <section class="section" aria-labelledby="section-vehicles" data-step="2" data-title="Your vehicles">
+                  <div class="section-header">
+                    <div class="section-title">
+                      <div class="section-title-badge">2</div>
+                      <span id="section-vehicles">Your vehicles</span>
+                    </div>
+                    <div class="section-tag">You can add more than one</div>
+                  </div>
+                  <div class="section-body">
+                    <div class="field-group">
+                      <div class="field-note">Fill in as much as you can. VIN is helpful but not required.</div>
+                      <div class="vehicles-shell" id="vehiclesShell">
+                        <!-- vehicle cards injected here -->
+                      </div>
+                      <button type="button" class="btn-soft" id="addVehicleBtn">
+                        <span class="icon">+</span>
+                        <span>Add another vehicle</span>
+                      </button>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Section 3: Driving history -->
+                <section class="section" aria-labelledby="section-history" data-step="3" data-title="Driving history">
+                  <div class="section-header">
+                    <div class="section-title">
+                      <div class="section-title-badge">3</div>
+                      <span id="section-history">Driving history</span>
+                    </div>
+                    <div class="section-tag">Last 3 years</div>
+                  </div>
+                  <div class="section-body">
+                    <div class="row">
+                      <div class="field-group col">
+                        <label>Any tickets in the last 3 years?</label>
+                        <div class="inline-radio">
+                          <label><input type="radio" name="tickets" value="no" checked /> No</label>
+                          <label><input type="radio" name="tickets" value="yes" /> Yes</label>
+                        </div>
+                      </div>
+                      <div class="field-group col">
+                        <label>Any accidents in the last 3 years?</label>
+                        <div class="inline-radio">
+                          <label><input type="radio" name="accidents" value="no" checked /> No</label>
+                          <label><input type="radio" name="accidents" value="yes" /> Yes</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="violDetails">If yes, please share brief details</label>
+                      <textarea id="violDetails" name="violDetails" placeholder="Dates, what happened, and who was at fault (if known)."></textarea>
+                    </div>
+                  </div>
+                </section>
+
+                <!-- Section 4: Coverage & contact -->
+                <section class="section" aria-labelledby="section-coverage" data-step="4" data-title="Coverage & contact">
+                  <div class="section-header">
+                    <div class="section-title">
+                      <div class="section-title-badge">4</div>
+                      <span id="section-coverage">Coverage & contact</span>
+                    </div>
+                    <div class="section-tag">How I can best help</div>
+                  </div>
+                  <div class="section-body">
+                    <div class="field-group">
+                      <label>Coverages you’re interested in</label>
+                      <div class="checkbox-row">
+                        <label><input type="checkbox" name="coverage" value="Liability" /> Liability</label>
+                        <label><input type="checkbox" name="coverage" value="Collision" /> Collision</label>
+                        <label><input type="checkbox" name="coverage" value="Comprehensive" /> Comprehensive</label>
+                        <label><input type="checkbox" name="coverage" value="Uninsured/Underinsured" /> Uninsured/Underinsured</label>
+                        <label><input type="checkbox" name="coverage" value="Rental Reimbursement" /> Rental Reimbursement</label>
+                      </div>
+                      <div class="field-note">Not sure what you need? Just pick a few and I’ll walk you through options.</div>
+                    </div>
+
+                    <div class="row">
+                      <div class="field-group col">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" required />
+                      </div>
+                      <div class="field-group col">
+                        <label for="phone">Phone</label>
+                        <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="field-group col">
+                        <label for="contactMethod">Preferred way to contact you</label>
+                        <select id="contactMethod" name="contactMethod" required>
+                          <option value="">Select one</option>
+                          <option>Phone call</option>
+                          <option>Text message</option>
+                          <option>Email</option>
+                        </select>
+                      </div>
+                      <div class="field-group col">
+                        <label for="contactTime">Best time to reach you</label>
+                        <input id="contactTime" name="contactTime" type="text" placeholder="e.g. Weekdays after 5pm" />
+                      </div>
+                    </div>
+
+                    <div class="pill-consent">
+                      <input id="consent" name="consent" type="checkbox" required />
+                      <label for="consent">
+                        I consent to have <strong>Reece (Aaron Grover Insurance Services)</strong> contact me about this quote.
+                        Your information is used only to provide your quote.
+                      </label>
+                    </div>
+                  </div>
+                </section>
+
+                <input type="hidden" id="agentName" value="Aaron Grover Insurance Services" />
+                <input type="hidden" id="agentContact" value="Reece — 801-523-2510" />
+
+                <div class="controls-bar">
+                  <button type="submit" class="btn-primary" id="submitBtn">
+                    <span class="icon" id="submitIcon">→</span>
+                    <span id="submitText">Submit my quote request</span>
+                  </button>
+                  <button type="button" class="btn-ghost" id="clearBtn">Clear form</button>
+                  <div id="status"></div>
                 </div>
-              </section>
+              </form>
+            </div>
 
-              <!-- Section 4: Coverage & contact -->
-              <section class="section" aria-labelledby="section-coverage">
-                <div class="section-header">
-                  <div class="section-title">
-                    <div class="section-title-badge">4</div>
-                    <span id="section-coverage">Coverage & contact</span>
-                  </div>
-                  <div class="section-tag">How I can best help</div>
-                </div>
-                <div class="section-body">
-                  <div class="field-group">
-                    <label>Coverages you’re interested in</label>
-                    <div class="checkbox-row">
-                      <label><input type="checkbox" name="coverage" value="Liability" /> Liability</label>
-                      <label><input type="checkbox" name="coverage" value="Collision" /> Collision</label>
-                      <label><input type="checkbox" name="coverage" value="Comprehensive" /> Comprehensive</label>
-                      <label><input type="checkbox" name="coverage" value="Uninsured/Underinsured" /> Uninsured/Underinsured</label>
-                      <label><input type="checkbox" name="coverage" value="Rental Reimbursement" /> Rental Reimbursement</label>
-                    </div>
-                    <div class="field-note">Not sure what you need? Just pick a few and I’ll walk you through options.</div>
-                  </div>
-
-                  <div class="row">
-                    <div class="field-group col">
-                      <label for="email">Email</label>
-                      <input id="email" name="email" type="email" autocomplete="email" required />
-                    </div>
-                    <div class="field-group col">
-                      <label for="phone">Phone</label>
-                      <input id="phone" name="phone" type="tel" autocomplete="tel" required />
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="field-group col">
-                      <label for="contactMethod">Preferred way to contact you</label>
-                      <select id="contactMethod" name="contactMethod" required>
-                        <option value="">Select one</option>
-                        <option>Phone call</option>
-                        <option>Text message</option>
-                        <option>Email</option>
-                      </select>
-                    </div>
-                    <div class="field-group col">
-                      <label for="contactTime">Best time to reach you</label>
-                      <input id="contactTime" name="contactTime" type="text" placeholder="e.g. Weekdays after 5pm" />
-                    </div>
-                  </div>
-
-                  <div class="pill-consent">
-                    <input id="consent" name="consent" type="checkbox" required />
-                    <label for="consent">
-                      I consent to have <strong>Reece (Aaron Grover Insurance Services)</strong> contact me about this quote.
-                      Your information is used only to provide your quote.
-                    </label>
-                  </div>
-                </div>
-              </section>
-
-              <input type="hidden" id="agentName" value="Aaron Grover Insurance Services" />
-              <input type="hidden" id="agentContact" value="Reece — 801-523-2510" />
-
-              <div class="controls-bar">
-                <button type="submit" class="btn-primary">
-                  <span class="icon">→</span>
-                  <span>Submit my quote request</span>
-                </button>
-                <button type="button" class="btn-ghost" id="clearBtn">Clear form</button>
-                <div id="status"></div>
-              </div>
-
-              <div id="successMessage">
-                ✅ <strong>Complete!</strong> Your quote request has been sent.<br/>
-                Reece will review your information and reach out to you about your quote.
-              </div>
-            </form>
+            <!-- FULL SUCCESS SCREEN -->
+            <div id="successPanel">
+              <div class="success-icon">✓</div>
+              <h2>Thank you for your request</h2>
+              <p>Your quote request has been sent successfully.</p>
+              <p>I’ll review your details and contact you using your preferred method and time.</p>
+              <p>If you need anything sooner, you can call or text me at <strong>801-523-2510</strong>.</p>
+              <button type="button" class="btn-primary" id="newQuoteBtn">
+                <span class="icon">+</span>
+                <span>Send another quote request</span>
+              </button>
+            </div>
 
             <div class="privacy-note">
               <strong>Privacy &amp; security</strong>
@@ -730,12 +821,44 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('quoteForm');
+      const formWrapper = document.getElementById('formWrapper');
       const statusEl = document.getElementById('status');
-      const successEl = document.getElementById('successMessage');
       const clearBtn = document.getElementById('clearBtn');
       const vehiclesShell = document.getElementById('vehiclesShell');
       const addVehicleBtn = document.getElementById('addVehicleBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitText');
+      const submitIcon = document.getElementById('submitIcon');
+      const successPanel = document.getElementById('successPanel');
+      const newQuoteBtn = document.getElementById('newQuoteBtn');
+      const stateInput = document.getElementById('state');
 
+      const progressBar = document.getElementById('progressBar');
+      const progressStep = document.getElementById('progressStep');
+      const progressTitle = document.getElementById('progressTitle');
+      const sections = Array.from(document.querySelectorAll('section.section'));
+
+      // --- Helper: progress bar ---
+      function updateProgressForSection(sectionEl){
+        const step = Number(sectionEl.dataset.step || 1);
+        const title = sectionEl.dataset.title || '';
+        const total = 4;
+        const pct = (step / total) * 100;
+        progressBar.style.width = pct + '%';
+        progressStep.textContent = `Step ${step} of ${total}`;
+        progressTitle.textContent = title;
+      }
+
+      // Focus-based step tracking
+      form.addEventListener('focusin', (e) => {
+        const sec = e.target.closest('section.section');
+        if(sec) updateProgressForSection(sec);
+      });
+
+      // initial
+      if (sections.length) updateProgressForSection(sections[0]);
+
+      // --- Vehicles ---
       function createVehicleCard(index){
         const card = document.createElement('div');
         card.className = 'vehicle-card';
@@ -808,6 +931,14 @@
         });
       }
 
+      // --- QoL: auto-uppercase state ---
+      if(stateInput){
+        stateInput.addEventListener('input', () => {
+          stateInput.value = stateInput.value.toUpperCase();
+        });
+      }
+
+      // --- Helpers ---
       function getCheckedValues(name) {
         return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
           .map(cb => cb.value);
@@ -834,7 +965,9 @@
           consent: document.getElementById('consent').checked,
           agentName: document.getElementById('agentName').value,
           agentContact: document.getElementById('agentContact').value,
-          vehicles: []
+          vehicles: [],
+          // Hint for the worker so it can send a customer confirmation email
+          sendConfirmationToCustomer: true
         };
 
         // collect vehicles from cards
@@ -852,25 +985,68 @@
         return data;
       }
 
+      // Clear error style as user types
+      form.addEventListener('input', (e) => {
+        if(e.target.classList.contains('input-error')){
+          e.target.classList.remove('input-error');
+        }
+      });
+
+      // Required fields and error highlighting
+      function validateRequired(payload){
+        let valid = true;
+        const requiredIds = ['fullName','street','city','state','zip','dob','ownRent','email','phone','contactMethod'];
+        requiredIds.forEach(id => {
+          const el = document.getElementById(id);
+          if(!el) return;
+          const value = (el.value || '').trim();
+          if(!value){
+            el.classList.add('input-error');
+            valid = false;
+          }else{
+            el.classList.remove('input-error');
+          }
+        });
+        const consent = document.getElementById('consent');
+        if(!consent.checked){
+          consent.classList.add('input-error');
+          valid = false;
+        }else{
+          consent.classList.remove('input-error');
+        }
+        return valid;
+      }
+
+      // Button sending state
+      function setSending(isSending){
+        if(isSending){
+          submitBtn.disabled = true;
+          submitBtn.classList.add('sending');
+          submitText.textContent = 'Sending…';
+          submitIcon.textContent = '⏳';
+        }else{
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('sending');
+          submitText.textContent = 'Submit my quote request';
+          submitIcon.textContent = '→';
+        }
+      }
+
+      // Submit
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         statusEl.textContent = '';
         statusEl.classList.remove('error','success');
-        successEl.style.display = 'none';
 
         const data = gatherPayload();
 
-        if (!data.fullName || !data.email || !data.phone) {
-          statusEl.textContent = 'Please complete name, email, and phone.';
-          statusEl.classList.add('error');
-          return;
-        }
-        if (!data.consent) {
-          statusEl.textContent = 'Please check the consent box so I can contact you.';
+        if (!validateRequired(data)) {
+          statusEl.textContent = 'Please complete the highlighted fields.';
           statusEl.classList.add('error');
           return;
         }
 
+        setSending(true);
         statusEl.textContent = 'Sending…';
 
         try {
@@ -883,17 +1059,23 @@
           if (res.ok) {
             form.reset();
             addInitialVehicle();
+            setSending(false);
             statusEl.textContent = '';
             statusEl.classList.remove('error');
             statusEl.classList.add('success');
-            successEl.style.display = 'block';
+
+            // show full success screen
+            formWrapper.style.display = 'none';
+            successPanel.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
+            setSending(false);
             statusEl.textContent = 'There was an issue sending your request. Please try again or text 801-523-2510.';
             statusEl.classList.add('error');
           }
         } catch (err) {
           console.error(err);
+          setSending(false);
           statusEl.textContent = 'Network error. Please try again or text 801-523-2510.';
           statusEl.classList.add('error');
         }
@@ -905,8 +1087,18 @@
           addInitialVehicle();
           statusEl.textContent = '';
           statusEl.classList.remove('error','success');
-          successEl.style.display = 'none';
         }
+      });
+
+      newQuoteBtn.addEventListener('click', () => {
+        successPanel.style.display = 'none';
+        formWrapper.style.display = 'block';
+        form.reset();
+        addInitialVehicle();
+        statusEl.textContent = '';
+        statusEl.classList.remove('error','success');
+        if (sections.length) updateProgressForSection(sections[0]);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
       // start with one vehicle card
@@ -915,3 +1107,45 @@
   </script>
 </body>
 </html>
+✅ Step 2: (Optional but powerful) – confirmation email in your Worker
+Your frontend now sends a flag:
+
+js
+Copy code
+sendConfirmationToCustomer: true
+In your Cloudflare worker (where you already send the email to yourself via SendGrid), you can add something like this after you send your main agent email:
+
+js
+Copy code
+// After sending the main email to you
+if (data.sendConfirmationToCustomer && data.email) {
+  const confirmBody = {
+    personalizations: [{
+      to: [{ email: data.email }],
+      subject: "We received your auto quote request"
+    }],
+    from: { email: env.FROM_EMAIL, name: "Reece – Aaron Grover Insurance" },
+    content: [{
+      type: "text/plain",
+      value:
+`Hi ${data.fullName || "there"},
+
+Thank you for requesting an auto insurance quote with Aaron Grover Insurance Services.
+
+I’ve received your information and will review your vehicles, coverage preferences, and driving history. I’ll reach out to you at ${data.phone || "the phone number you provided"} via ${data.contactMethod || "your preferred contact method"}.
+
+If you need anything sooner, you can call or text me at 801-523-2510.
+
+– Reece`
+    }]
+  };
+
+  await fetch("https://api.sendgrid.com/v3/mail/send", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${env.SENDGRID_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(confirmBody)
+  });
+}
