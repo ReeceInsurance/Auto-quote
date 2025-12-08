@@ -290,6 +290,64 @@
     .pill-consent input{margin-top:2px;width:auto;transform:scale(1.05);}
     .pill-consent strong{color:var(--text);}
 
+    /* Vehicle cards */
+    .vehicles-shell{
+      border-radius:14px;
+      border:1px solid rgba(31,41,55,0.9);
+      background:
+        radial-gradient(circle at top left,rgba(37,99,235,0.25) 0,transparent 55%),
+        radial-gradient(circle at bottom right,rgba(15,118,110,0.18) 0,transparent 60%),
+        rgba(15,23,42,0.98);
+      padding:8px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .vehicle-card{
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,1);
+      padding:8px 10px;
+    }
+    .vehicle-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+      font-size:13px;
+      color:var(--text-soft);
+    }
+    .vehicle-tag{display:inline-flex;align-items:center;gap:6px;}
+    .vehicle-dot{width:7px;height:7px;border-radius:999px;background:var(--accent);}
+    .chip-remove{
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(248,113,113,0.9);
+      background:rgba(127,29,29,0.4);
+      color:var(--error);
+      font-size:11px;
+      cursor:pointer;
+    }
+    .vehicle-fields .row{margin-top:4px;}
+    .vehicle-fields input{font-size:13px;}
+    .btn-soft{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(15,23,42,0.98);
+      color:var(--text);
+      padding:7px 12px;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      margin-top:4px;
+    }
+    .btn-soft span.icon{
+      width:16px;height:16px;border-radius:999px;border:1px solid rgba(148,163,184,0.8);
+      display:flex;align-items:center;justify-content:center;font-size:12px;
+    }
+
     .controls-bar{
       display:flex;
       gap:10px;
@@ -519,22 +577,25 @@
                 </div>
               </section>
 
-              <!-- Section 2: Vehicles -->
+              <!-- Section 2: Vehicles (card-based) -->
               <section class="section" aria-labelledby="section-vehicles">
                 <div class="section-header">
                   <div class="section-title">
                     <div class="section-title-badge">2</div>
                     <span id="section-vehicles">Your vehicles</span>
                   </div>
-                  <div class="section-tag">List each car you’d like quoted</div>
+                  <div class="section-tag">You can add more than one</div>
                 </div>
                 <div class="section-body">
                   <div class="field-group">
-                    <label for="vehicles">Vehicles</label>
-                    <textarea id="vehicles" name="vehicles" placeholder="Example:
-2018 Toyota Camry SE — VIN 1HGCM82633A123456
-2021 Honda CR-V EX — VIN 2HKRM4H5XMH123456"></textarea>
-                    <div class="field-note">List year, make, model, and VIN if you have it. You can paste from your current insurance card.</div>
+                    <div class="field-note">Fill in as much as you can. VIN is helpful but not required.</div>
+                    <div class="vehicles-shell" id="vehiclesShell">
+                      <!-- vehicle cards injected here -->
+                    </div>
+                    <button type="button" class="btn-soft" id="addVehicleBtn">
+                      <span class="icon">+</span>
+                      <span>Add another vehicle</span>
+                    </button>
                   </div>
                 </div>
               </section>
@@ -645,7 +706,7 @@
               </div>
 
               <div id="successMessage">
-                ✅ <strong>Complete!</strong> Your quote request has been sent.  
+                ✅ <strong>Complete!</strong> Your quote request has been sent.<br/>
                 Reece will review your information and reach out to you about your quote.
               </div>
             </form>
@@ -672,6 +733,80 @@
       const statusEl = document.getElementById('status');
       const successEl = document.getElementById('successMessage');
       const clearBtn = document.getElementById('clearBtn');
+      const vehiclesShell = document.getElementById('vehiclesShell');
+      const addVehicleBtn = document.getElementById('addVehicleBtn');
+
+      function createVehicleCard(index){
+        const card = document.createElement('div');
+        card.className = 'vehicle-card';
+        card.dataset.index = index;
+
+        card.innerHTML = `
+          <div class="vehicle-header">
+            <div class="vehicle-tag">
+              <span class="vehicle-dot"></span>
+              <span>Vehicle ${index + 1}</span>
+            </div>
+            <button type="button" class="chip-remove">Remove</button>
+          </div>
+          <div class="vehicle-fields">
+            <div class="row">
+              <div class="field-group col">
+                <label>Year</label>
+                <input type="text" name="vehicle_year_${index}" placeholder="2018" />
+              </div>
+              <div class="field-group col">
+                <label>Make</label>
+                <input type="text" name="vehicle_make_${index}" placeholder="Toyota" />
+              </div>
+              <div class="field-group col">
+                <label>Model</label>
+                <input type="text" name="vehicle_model_${index}" placeholder="Camry" />
+              </div>
+            </div>
+            <div class="field-group" style="margin-top:6px;">
+              <label>VIN (optional)</label>
+              <input type="text" name="vehicle_vin_${index}" placeholder="Vehicle Identification Number" />
+            </div>
+          </div>
+        `;
+
+        const removeBtn = card.querySelector('.chip-remove');
+        removeBtn.addEventListener('click', () => {
+          const allCards = document.querySelectorAll('.vehicle-card');
+          if(allCards.length > 1){
+            card.remove();
+            renumberVehicleCards();
+          }
+        });
+
+        return card;
+      }
+
+      function renumberVehicleCards(){
+        const cards = document.querySelectorAll('.vehicle-card');
+        cards.forEach((card, idx) => {
+          card.dataset.index = idx;
+          card.querySelector('.vehicle-tag span:nth-child(2)').textContent = 'Vehicle ' + (idx + 1);
+          card.querySelector('input[name^="vehicle_year_"]').setAttribute('name','vehicle_year_' + idx);
+          card.querySelector('input[name^="vehicle_make_"]').setAttribute('name','vehicle_make_' + idx);
+          card.querySelector('input[name^="vehicle_model_"]').setAttribute('name','vehicle_model_' + idx);
+          card.querySelector('input[name^="vehicle_vin_"]').setAttribute('name','vehicle_vin_' + idx);
+        });
+      }
+
+      function addInitialVehicle(){
+        if(!vehiclesShell) return;
+        vehiclesShell.innerHTML = '';
+        vehiclesShell.appendChild(createVehicleCard(0));
+      }
+
+      if(addVehicleBtn){
+        addVehicleBtn.addEventListener('click', () => {
+          const count = document.querySelectorAll('.vehicle-card').length;
+          vehiclesShell.appendChild(createVehicleCard(count));
+        });
+      }
 
       function getCheckedValues(name) {
         return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
@@ -679,7 +814,7 @@
       }
 
       function gatherPayload() {
-        return {
+        const data = {
           fullName: document.getElementById('fullName').value.trim(),
           street: document.getElementById('street').value.trim(),
           city: document.getElementById('city').value.trim(),
@@ -688,7 +823,6 @@
           dob: document.getElementById('dob').value,
           ownRent: document.getElementById('ownRent').value,
           drivers: document.getElementById('drivers').value.trim(),
-          vehicles: document.getElementById('vehicles').value.trim(),
           tickets: (document.querySelector('input[name="tickets"]:checked') || {}).value || '',
           accidents: (document.querySelector('input[name="accidents"]:checked') || {}).value || '',
           violDetails: document.getElementById('violDetails').value.trim(),
@@ -699,8 +833,23 @@
           coverages: getCheckedValues('coverage'),
           consent: document.getElementById('consent').checked,
           agentName: document.getElementById('agentName').value,
-          agentContact: document.getElementById('agentContact').value
+          agentContact: document.getElementById('agentContact').value,
+          vehicles: []
         };
+
+        // collect vehicles from cards
+        document.querySelectorAll('.vehicle-card').forEach(card => {
+          const idx = card.dataset.index;
+          const year = (card.querySelector(`input[name="vehicle_year_${idx}"]`)?.value || '').trim();
+          const make = (card.querySelector(`input[name="vehicle_make_${idx}"]`)?.value || '').trim();
+          const model = (card.querySelector(`input[name="vehicle_model_${idx}"]`)?.value || '').trim();
+          const vin = (card.querySelector(`input[name="vehicle_vin_${idx}"]`)?.value || '').trim();
+          if (year || make || model || vin) {
+            data.vehicles.push({ year, make, model, vin });
+          }
+        });
+
+        return data;
       }
 
       form.addEventListener('submit', async (e) => {
@@ -733,6 +882,7 @@
 
           if (res.ok) {
             form.reset();
+            addInitialVehicle();
             statusEl.textContent = '';
             statusEl.classList.remove('error');
             statusEl.classList.add('success');
@@ -752,11 +902,15 @@
       clearBtn.addEventListener('click', () => {
         if (confirm('Clear the form?')) {
           form.reset();
+          addInitialVehicle();
           statusEl.textContent = '';
           statusEl.classList.remove('error','success');
           successEl.style.display = 'none';
         }
       });
+
+      // start with one vehicle card
+      addInitialVehicle();
     });
   </script>
 </body>
