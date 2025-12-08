@@ -1,0 +1,1117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aaron Grover Insurance Services | Quick Auto Quote</title>
+  <style>
+    :root{
+      --bg:#020617;
+      --card:#020617;
+      --accent:#3b82f6;
+      --accent-soft:#1d4ed8;
+      --border:#1f2937;
+      --muted:#9ca3af;
+      --text:#f9fafb;
+      --text-soft:#d1d5db;
+      --error:#fecaca;
+    }
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+      background:radial-gradient(circle at top,#0b1120 0,#020617 55%,#000 100%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+    }
+    .shell{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px 16px;
+    }
+    .frame{
+      width:100%;
+      max-width:1024px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 10% 0%,rgba(56,189,248,0.14) 0,transparent 55%),
+        radial-gradient(circle at 90% 0%,rgba(59,130,246,0.22) 0,transparent 55%),
+        #020617;
+      box-shadow:
+        0 40px 120px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(148,163,184,0.18);
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .frame::before{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:22px;
+      border:1px solid rgba(148,163,184,0.16);
+      pointer-events:none;
+    }
+    .content{
+      position:relative;
+      z-index:1;
+      border-radius:20px;
+      padding:20px 20px 18px;
+      background:rgba(15,23,42,0.95);
+      max-width:100%;
+      margin:0 auto;
+    }
+
+    /* --- HERO / HEADER --- */
+    header{
+      margin-bottom:18px;
+    }
+    .hero-header{
+    /* App-style glowing home/auto icon */
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:36px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(96,165,250,0.45), transparent 60%),
+        radial-gradient(circle at 70% 110%, rgba(15,23,42,0.9), #020617);
+      border:1px solid rgba(148,163,184,0.65);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:
+        0 22px 60px rgba(15,23,42,0.95),
+        0 0 24px rgba(37,99,235,0.65);
+      overflow:hidden;
+    }
+    .logo-mark svg{
+      width:78%;
+      height:78%;
+      display:block;
+    }
+
+    
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:14px;
+      text-align:center;
+    }
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:32px;
+      background:radial-gradient(circle at 30% 0,rgba(148,163,184,0.45),transparent 65%),
+                  #e5e7eb;
+      border:1px solid rgba(148,163,184,0.9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:0 18px 40px rgba(15,23,42,0.95);
+      overflow:hidden;
+    }
+    .logo-mark svg{
+      width:104px;
+      height:104px;
+    }
+    .hero-text{
+      flex:1;
+      min-width:0;
+      text-align:center;
+    }
+
+    .logo-mark{
+      width:120px;
+      height:120px;
+      border-radius:28px;
+      background:transparent;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      /* fade edges into dark background */
+      mix-blend-mode:screen;
+    }
+    .logo-mark img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      filter: drop-shadow(0 0 6px rgba(30,58,138,0.8));
+    }
+
+
+    .logo-mark img{
+      width:88%;
+      height:88%;
+      object-fit:contain;
+      display:block;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:rgba(15,23,42,0.95);
+      border:1px solid rgba(148,163,184,0.5);
+      font-size:12px;
+      color:var(--text-soft);
+      width:max-content;
+      margin-bottom:4px;
+    }
+    .badge-dot{
+      width:8px;height:8px;border-radius:999px;
+      background:var(--accent);
+      box-shadow:0 0 0 4px rgba(59,130,246,0.35);
+    }
+    h1{
+      margin:0;
+      font-size:24px;
+      letter-spacing:-0.03em;
+    }
+    .subtitle{
+      margin:4px 0 6px;
+      font-size:15px;
+      color:var(--text-soft);
+      max-width:520px;
+    }
+    .hero-points{
+      list-style:none;
+      padding:0;
+      margin:6px 0 0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 16px;
+      font-size:12px;
+      color:var(--text-soft);
+    }
+    .hero-points li{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .hero-bullet{
+      width:14px;
+      height:14px;
+      border-radius:999px;
+      border:1px solid rgba(52,211,153,0.8);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:10px;
+      color:#bbf7d0;
+      background:rgba(22,163,74,0.3);
+    }
+
+    .layout{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+    }
+    .sidebar{
+      flex:0 0 260px;
+      font-size:14px;
+      color:var(--text-soft);
+      border-right:1px solid rgba(31,41,55,0.8);
+      padding-right:18px;
+    }
+    .sidebar h2{
+      font-size:16px;
+      margin:0 0 8px;
+      color:var(--text);
+    }
+    .steps{
+      list-style:none;
+      padding:0;
+      margin:12px 0 0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .steps li{
+      display:flex;
+      gap:8px;
+      align-items:flex-start;
+    }
+    .step-index{
+      width:22px;height:22px;border-radius:999px;
+      border:2px solid var(--accent);
+      display:flex;align-items:center;justify-content:center;
+      font-size:12px;
+      color:var(--accent-soft);
+      background:rgba(15,23,42,0.9);
+      flex-shrink:0;
+    }
+    .step-body{
+      font-size:13px;
+      color:var(--text-soft);
+    }
+    .step-title{font-weight:600;color:var(--text);}
+    .main-form{
+      flex:1;
+      min-width:0;
+    }
+    form{margin-top:4px;display:flex;flex-direction:column;gap:16px;}
+    .section{
+      border-radius:16px;
+      border:1px solid rgba(31,41,55,0.9);
+      background:rgba(15,23,42,0.98);
+      padding:12px 12px 10px;
+    }
+    .section-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:8px;
+    }
+    .section-title{
+      font-size:15px;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .section-tag{
+      font-size:11px;
+      color:var(--muted);
+    }
+    .section-title-badge{
+      width:18px;height:18px;border-radius:999px;
+      background:rgba(37,99,235,0.18);
+      border:1px solid rgba(59,130,246,0.8);
+      display:flex;align-items:center;justify-content:center;
+      font-size:11px;
+      color:var(--accent-soft);
+    }
+    .section-body{display:flex;flex-direction:column;gap:10px;}
+    .field-group{display:flex;flex-direction:column;gap:5px;}
+    label{
+      font-size:13px;
+      font-weight:500;
+      color:var(--text-soft);
+    }
+    .row{display:flex;gap:10px;}
+    .col{flex:1;}
+    input,select,textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.98);
+      color:var(--text);
+      padding:10px 12px;
+      font-size:14px;
+      outline:none;
+      transition:border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.08s ease;
+    }
+    input::placeholder,textarea::placeholder{color:#9ca3af;}
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--accent);
+      box-shadow:0 0 0 1px rgba(59,130,246,0.9);
+      background:#020617;
+      transform:translateY(-0.5px);
+    }
+    textarea{min-height:80px;resize:vertical;}
+    select{
+      appearance:none;
+      background-image:linear-gradient(45deg,transparent 50%,#9ca3af 50%),linear-gradient(135deg,#9ca3af 50%,transparent 50%);
+      background-position:calc(100% - 16px) calc(50% - 4px),calc(100% - 10px) calc(50% - 4px);
+      background-size:5px 5px,5px 5px;
+      background-repeat:no-repeat;
+      padding-right:28px;
+    }
+    .field-note{font-size:12px;color:var(--muted);}
+    .checkbox-row{display:flex;flex-wrap:wrap;gap:8px;}
+    .checkbox-row label{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.97);
+      font-size:12px;
+      cursor:pointer;
+    }
+    .checkbox-row input{width:auto;transform:scale(1);}
+    .inline-radio{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;}
+    .inline-radio label{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);cursor:pointer;}
+    .inline-radio input{width:auto;transform:scale(1);}
+    .pill-consent{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(15,23,42,0.98);
+      font-size:12px;
+      color:var(--muted);
+    }
+    .pill-consent input{margin-top:2px;width:auto;transform:scale(1.05);}
+    .pill-consent strong{color:var(--text);}
+    .vehicles-shell{
+      border-radius:14px;
+      border:1px solid rgba(31,41,55,0.9);
+      background:
+        radial-gradient(circle at top left,rgba(37,99,235,0.25) 0,transparent 55%),
+        radial-gradient(circle at bottom right,rgba(15,118,110,0.18) 0,transparent 60%),
+        rgba(15,23,42,0.98);
+      padding:8px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .vehicle-card{
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,0.5);
+      background:rgba(15,23,42,1);
+      padding:8px 10px;
+    }
+    .vehicle-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:6px;
+      font-size:13px;
+      color:var(--text-soft);
+    }
+    .vehicle-tag{display:inline-flex;align-items:center;gap:6px;}
+    .vehicle-dot{width:7px;height:7px;border-radius:999px;background:var(--accent);}
+    .chip-remove{
+      border-radius:999px;
+      padding:4px 10px;
+      border:1px solid rgba(248,113,113,0.9);
+      background:rgba(127,29,29,0.4);
+      color:var(--error);
+      font-size:11px;
+      cursor:pointer;
+    }
+    .vehicle-fields .row{margin-top:4px;}
+    .vehicle-fields input{font-size:13px;}
+    .btn-soft{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:rgba(15,23,42,0.98);
+      color:var(--text);
+      padding:7px 12px;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      cursor:pointer;
+      margin-top:4px;
+    }
+    .btn-soft span.icon{
+      width:16px;height:16px;border-radius:999px;border:1px solid rgba(148,163,184,0.8);
+      display:flex;align-items:center;justify-content:center;font-size:12px;
+    }
+    .controls-bar{
+      display:flex;
+      gap:10px;
+      margin-top:8px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-start;
+    }
+    .btn-primary{
+      border-radius:999px;
+      border:none;
+      padding:11px 18px;
+      background:linear-gradient(135deg,var(--accent) 0,var(--accent-soft) 100%);
+      color:white;
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow:0 16px 32px rgba(37,99,235,0.55);
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btn-primary span.icon{
+      width:18px;height:18px;border-radius:999px;
+      background:rgba(15,23,42,0.95);
+      display:flex;align-items:center;justify-content:center;font-size:12px;
+    }
+    .btn-ghost{
+      border-radius:999px;
+      padding:9px 14px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:transparent;
+      color:var(--text-soft);
+      font-size:13px;
+      cursor:pointer;
+    }
+    #status{font-size:12px;color:var(--muted);min-height:18px;}
+    .success{color:#bbf7d0;}
+
+    .success-panel{
+      display:none;
+      padding:32px 18px 22px;
+      text-align:center;
+    }
+    .success-panel h2{
+      font-size:22px;
+      margin:0 0 8px;
+    }
+    .success-panel p{
+      margin:4px 0;
+      font-size:14px;
+      color:var(--text-soft);
+    }
+    .success-icon{
+      width:52px;height:52px;border-radius:999px;
+      margin:0 auto 12px;
+      border:2px solid #22c55e;
+      display:flex;align-items:center;justify-content:center;
+      color:#bbf7d0;
+      font-size:26px;
+      background:rgba(22,163,74,0.18);
+      box-shadow:0 0 0 6px rgba(34,197,94,0.25);
+    }
+
+    .privacy-note{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(31,41,55,0.9);
+      background:rgba(15,23,42,0.98);
+      font-size:12px;
+      color:var(--text-soft);
+    }
+    .privacy-note strong{
+      display:block;
+      margin-bottom:4px;
+      color:var(--text);
+    }
+
+    footer{
+      margin-top:12px;
+      font-size:12px;
+      text-align:left;
+      color:var(--muted);
+    }
+    footer strong{color:var(--text);}
+
+    
+    /* iOS-style app icon tile for home/auto */
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:32px;
+      background:radial-gradient(circle at 30% 0%, #ffffff 0, #e5e7eb 45%, #d1d5db 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:
+        0 20px 45px rgba(15,23,42,0.95),
+        0 0 0 1px rgba(148,163,184,0.5);
+      overflow:hidden;
+    }
+    .logo-mark svg{
+      width:76%;
+      height:76%;
+      display:block;
+    }
+
+
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:32px;
+      background:radial-gradient(circle at 30% 0%, #ffffff 0, #f3f4f6 45%, #e5e7eb 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:
+        0 18px 45px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(148,163,184,0.4);
+    }
+    .logo-mark svg{
+      width:70%;
+      height:70%;
+      display:block;
+    }
+
+
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:32px;
+      background:radial-gradient(circle at 30% 0%, #ffffff 0, #f3f4f6 45%, #e5e7eb 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:0 20px 45px rgba(15,23,42,0.9);
+      border:1px solid rgba(148,163,184,0.45);
+      overflow:hidden;
+    }
+    .logo-mark svg{
+      width:72%;
+      height:72%;
+      display:block;
+    }
+
+@media (max-width:880px){
+      .layout{flex-direction:column;gap:16px;}
+      .sidebar{
+        border-right:none;
+        border-bottom:1px solid rgba(31,41,55,0.8);
+        padding-right:0;
+        padding-bottom:12px;
+      }
+      .shell{padding:20px 10px;}
+      .frame{padding:18px 12px;border-radius:24px;}
+      .content{padding:16px 14px;}
+    }
+    @media (max-width:600px){
+      .row{flex-direction:column;}
+      h1{font-size:21px;}
+      .subtitle{font-size:14px;}
+      input,select,textarea{font-size:15px;}
+      .section{padding:10px 10px 8px;}
+      .btn-primary{width:100%;justify-content:center;}
+      .btn-ghost{width:100%;text-align:center;}
+      .controls-bar{flex-direction:column;align-items:stretch;}
+      footer{text-align:center;}
+      header{text-align:left;}
+      .hero-header{
+    /* App-style glowing home/auto icon */
+    .logo-mark{
+      width:132px;
+      height:132px;
+      border-radius:36px;
+      background:
+        radial-gradient(circle at 30% 0%, rgba(96,165,250,0.45), transparent 60%),
+        radial-gradient(circle at 70% 110%, rgba(15,23,42,0.9), #020617);
+      border:1px solid rgba(148,163,184,0.65);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      box-shadow:
+        0 22px 60px rgba(15,23,42,0.95),
+        0 0 24px rgba(37,99,235,0.65);
+      overflow:hidden;
+    }
+    .logo-mark svg{
+      width:78%;
+      height:78%;
+      display:block;
+    }
+
+    flex-direction:row;}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="frame">
+      <div class="content">
+        <header>
+          <div class="hero-header">
+            <div class="logo-mark" aria-hidden="true">
+              <!-- Solid home + auto icon inside rounded app tile (closer to reference) -->
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <!-- House: solid roof + walls -->
+                <path
+                  d="M18 30 L32 18 L46 30 L46 40 L18 40 Z"
+                  fill="#1d4ed8"
+                />
+                <!-- Window: 4-pane -->
+                <rect x="28" y="24.5" width="8" height="8" rx="1.2"
+                      fill="#f9fafb"/>
+                <path d="M32 24.5v8" stroke="#1d4ed8" stroke-width="1.2"/>
+                <path d="M28 28.5h8" stroke="#1d4ed8" stroke-width="1.2"/>
+                <!-- Car body -->
+                <path
+                  d="M22 44
+                     C22 38 26 34 32 34
+                     C38 34 42 38 42 44
+                     Z"
+                  fill="#1d4ed8"
+                />
+                <!-- Windshield -->
+                <path
+                  d="M26.5 36.2
+                     C27.2 35 28.4 34.3 30 34.3
+                     H34
+                     C35.6 34.3 36.8 35 37.5 36.2
+                     L37.9 37.4 H26.1 Z"
+                  fill="#f9fafb"
+                />
+                <!-- Headlights -->
+                <ellipse cx="26.5" cy="40" rx="2.1" ry="1.5" fill="#f9fafb"/>
+                <ellipse cx="37.5" cy="40" rx="2.1" ry="1.5" fill="#f9fafb"/>
+              </svg>
+            </div>
+            <div class="hero-text">
+              <div class="badge">
+                <span class="badge-dot"></span>
+                <span>Aaron Grover Insurance Services</span>
+              </div>
+              <h1>Request an auto insurance quote</h1>
+              <p class="subtitle">
+                I’m Reece. This short form usually takes about 2–3 minutes. I’ll review it and contact you personally at your preferred time.
+              </p>
+              <ul class="hero-points">
+                <li><span class="hero-bullet">✓</span><span>No obligation — just a quote</span></li>
+                <li><span class="hero-bullet">✓</span><span>Personal follow-up from Reece</span></li>
+                <li><span class="hero-bullet">✓</span><span>Your details kept private & secure</span></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <div class="layout">
+          <aside class="sidebar" aria-label="Form steps overview">
+            <h2>What you’ll share</h2>
+            <ul class="steps">
+              <li>
+                <div class="step-index">1</div>
+                <div class="step-body">
+                  <div class="step-title">About you</div>
+                  Basic contact and address.
+                </div>
+              </li>
+              <li>
+                <div class="step-index">2</div>
+                <div class="step-body">
+                  <div class="step-title">Your vehicles</div>
+                  Year, make, model for each car.
+                </div>
+              </li>
+              <li>
+                <div class="step-index">3</div>
+                <div class="step-body">
+                  <div class="step-title">Driving history</div>
+                  Tickets or accidents (if any).
+                </div>
+              </li>
+              <li>
+                <div class="step-index">4</div>
+                <div class="step-body">
+                  <div class="step-title">Coverage & contact</div>
+                  What you want and how to reach you.
+                </div>
+              </li>
+            </ul>
+          </aside>
+
+          <main class="main-form">
+            <form id="quoteForm" autocomplete="on">
+              <!-- Section 1: About you -->
+              <section class="section" aria-labelledby="section-about">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-badge">1</div>
+                    <span id="section-about">About you</span>
+                  </div>
+                  <div class="section-tag">Basic information</div>
+                </div>
+                <div class="section-body">
+                  <div class="field-group">
+                    <label for="fullName">Full name</label>
+                    <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+                  </div>
+
+                  <div class="field-group">
+                    <label for="street">Street address</label>
+                    <input id="street" name="street" type="text" autocomplete="street-address" required />
+                  </div>
+
+                  <div class="row">
+                    <div class="field-group col">
+                      <label for="city">City</label>
+                      <input id="city" name="city" type="text" required />
+                    </div>
+                    <div class="field-group col">
+                      <label for="state">State</label>
+                      <input id="state" name="state" type="text" maxlength="2" placeholder="UT" required />
+                    </div>
+                    <div class="field-group col">
+                      <label for="zip">ZIP</label>
+                      <input id="zip" name="zip" type="text" inputmode="numeric" pattern="\d{5}(-\d{4})?" required />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="field-group col">
+                      <label for="dob">Date of birth</label>
+                      <input id="dob" name="dob" type="date" required />
+                    </div>
+                    <div class="field-group col">
+                      <label for="ownRent">Do you own or rent your home?</label>
+                      <select id="ownRent" name="ownRent" required>
+                        <option value="">Select one</option>
+                        <option>Own</option>
+                        <option>Rent</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label for="drivers">Other household drivers (if any)</label>
+                    <textarea id="drivers" name="drivers" placeholder="Names, dates of birth, and license state for anyone else who drives your vehicles."></textarea>
+                    <div class="field-note">If you’re the only driver in the household, you can leave this blank.</div>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section 2: Vehicles -->
+              <section class="section" aria-labelledby="section-vehicles">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-badge">2</div>
+                    <span id="section-vehicles">Your vehicles</span>
+                  </div>
+                  <div class="section-tag">You can add more than one</div>
+                </div>
+                <div class="section-body">
+                  <div class="field-group">
+                    <div class="field-note">Fill in as much as you can. VIN is helpful but not required.</div>
+                    <div class="vehicles-shell" id="vehiclesShell">
+                      <!-- vehicle cards injected here -->
+                    </div>
+                    <button type="button" class="btn-soft" id="addVehicleBtn">
+                      <span class="icon">+</span>
+                      <span>Add another vehicle</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section 3: Driving history -->
+              <section class="section" aria-labelledby="section-history">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-badge">3</div>
+                    <span id="section-history">Driving history</span>
+                  </div>
+                  <div class="section-tag">Last 3 years</div>
+                </div>
+                <div class="section-body">
+                  <div class="row">
+                    <div class="field-group col">
+                      <label>Any tickets in the last 3 years?</label>
+                      <div class="inline-radio">
+                        <label><input type="radio" name="tickets" value="no" checked /> No</label>
+                        <label><input type="radio" name="tickets" value="yes" /> Yes</label>
+                      </div>
+                    </div>
+                    <div class="field-group col">
+                      <label>Any accidents in the last 3 years?</label>
+                      <div class="inline-radio">
+                        <label><input type="radio" name="accidents" value="no" checked /> No</label>
+                        <label><input type="radio" name="accidents" value="yes" /> Yes</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label for="violDetails">If yes, please share brief details</label>
+                    <textarea id="violDetails" name="violDetails" placeholder="Dates, what happened, and who was at fault (if known)."></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Section 4: Coverage & contact -->
+              <section class="section" aria-labelledby="section-coverage">
+                <div class="section-header">
+                  <div class="section-title">
+                    <div class="section-title-badge">4</div>
+                    <span id="section-coverage">Coverage & contact</span>
+                  </div>
+                  <div class="section-tag">How I can best help</div>
+                </div>
+                <div class="section-body">
+                  <div class="field-group">
+                    <label>Coverages you’re interested in</label>
+                    <div class="checkbox-row">
+                      <label><input type="checkbox" name="coverage" value="Liability" /> Liability</label>
+                      <label><input type="checkbox" name="coverage" value="Collision" /> Collision</label>
+                      <label><input type="checkbox" name="coverage" value="Comprehensive" /> Comprehensive</label>
+                      <label><input type="checkbox" name="coverage" value="Uninsured/Underinsured" /> Uninsured/Underinsured</label>
+                      <label><input type="checkbox" name="coverage" value="Rental Reimbursement" /> Rental Reimbursement</label>
+                    </div>
+                    <div class="field-note">Not sure what you need? Just pick a few and I’ll walk you through options.</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="field-group col">
+                      <label for="email">Email</label>
+                      <input id="email" name="email" type="email" autocomplete="email" required />
+                    </div>
+                    <div class="field-group col">
+                      <label for="phone">Phone</label>
+                      <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="field-group col">
+                      <label for="contactMethod">Preferred way to contact you</label>
+                      <select id="contactMethod" name="contactMethod" required>
+                        <option value="">Select one</option>
+                        <option>Phone call</option>
+                        <option>Text message</option>
+                        <option>Email</option>
+                      </select>
+                    </div>
+                    <div class="field-group col">
+                      <label for="contactTime">Best time to reach you</label>
+                      <input id="contactTime" name="contactTime" type="text" placeholder="e.g. Weekdays after 5pm" />
+                    </div>
+                  </div>
+
+                  <div class="pill-consent">
+                    <input id="consent" name="consent" type="checkbox" required />
+                    <label for="consent">I consent to have <strong>Reece (Aaron Grover Insurance Services)</strong> contact me about this quote. Your information is used only to provide your quote.</label>
+                  </div>
+                </div>
+              </section>
+
+              <input type="hidden" id="agentName" value="Aaron Grover Insurance Services" />
+              <input type="hidden" id="agentContact" value="Reece — 801-523-2510" />
+
+              <div class="controls-bar">
+                <button type="submit" class="btn-primary">
+                  <span class="icon">→</span>
+                  <span>Submit my quote request</span>
+                </button>
+                <button type="button" class="btn-ghost" id="clearBtn">Clear form</button>
+                <div id="status"></div>
+              </div>
+            </form>
+
+            <div id="successPanel" class="success-panel" aria-live="polite">
+              <div class="success-icon">✓</div>
+              <h2>Thank you for your request</h2>
+              <p>Your quote request has been sent successfully.</p>
+              <p>I’ll review your details and contact you at your preferred method and time.</p>
+              <p>If you need anything sooner, you can call or text me at <strong>801-523-2510</strong>.</p>
+              <button type="button" class="btn-primary" id="newQuoteBtn">
+                <span class="icon">+</span>
+                <span>Send another quote request</span>
+              </button>
+            </div>
+
+            <div class="privacy-note">
+              <strong>Privacy &amp; security</strong>
+              <p>Your details are sent over an encrypted connection and delivered securely to our office email. We use this information only to provide your insurance quote and to contact you. We do not sell your information.</p>
+            </div>
+
+            <footer>
+              Questions before you fill this out? Call or text Reece at <strong>801-523-2510</strong>.
+            </footer>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const vehiclesShell = document.getElementById('vehiclesShell');
+      const addVehicleBtn = document.getElementById('addVehicleBtn');
+      const form = document.getElementById('quoteForm');
+      const statusEl = document.getElementById('status');
+      const clearBtn = document.getElementById('clearBtn');
+      const successPanel = document.getElementById('successPanel');
+      const newQuoteBtn = document.getElementById('newQuoteBtn');
+
+      function createVehicleCard(index){
+        const card = document.createElement('div');
+        card.className = 'vehicle-card';
+        card.dataset.index = index;
+
+        card.innerHTML = `
+          <div class="vehicle-header">
+            <div class="vehicle-tag">
+              <span class="vehicle-dot"></span>
+              <span>Vehicle ${index + 1}</span>
+            </div>
+            <button type="button" class="chip-remove">Remove</button>
+          </div>
+          <div class="vehicle-fields">
+            <div class="row">
+              <div class="field-group col">
+                <label>Year</label>
+                <input type="text" name="vehicle_year_${index}" placeholder="2018" />
+              </div>
+              <div class="field-group col">
+                <label>Make</label>
+                <input type="text" name="vehicle_make_${index}" placeholder="Toyota" />
+              </div>
+              <div class="field-group col">
+                <label>Model</label>
+                <input type="text" name="vehicle_model_${index}" placeholder="Camry" />
+              </div>
+            </div>
+            <div class="field-group" style="margin-top:6px;">
+              <label>VIN (optional)</label>
+              <input type="text" name="vehicle_vin_${index}" placeholder="Vehicle Identification Number" />
+            </div>
+          </div>
+        `;
+
+        const removeBtn = card.querySelector('.chip-remove');
+        removeBtn.addEventListener('click', () => {
+          if(document.querySelectorAll('.vehicle-card').length > 1){
+            card.remove();
+            renumberVehicleCards();
+          }
+        });
+
+        return card;
+      }
+
+      function renumberVehicleCards(){
+        const cards = document.querySelectorAll('.vehicle-card');
+        cards.forEach((card, idx) => {
+          card.dataset.index = idx;
+          card.querySelector('.vehicle-tag span:nth-child(2)').textContent = 'Vehicle ' + (idx + 1);
+          card.querySelector('input[name^="vehicle_year_"]').setAttribute('name','vehicle_year_' + idx);
+          card.querySelector('input[name^="vehicle_make_"]').setAttribute('name','vehicle_make_' + idx);
+          card.querySelector('input[name^="vehicle_model_"]').setAttribute('name','vehicle_model_' + idx);
+          card.querySelector('input[name^="vehicle_vin_"]').setAttribute('name','vehicle_vin_' + idx);
+        });
+      }
+
+      function addInitialVehicle(){
+        if(!vehiclesShell) return;
+        vehiclesShell.innerHTML = '';
+        vehiclesShell.appendChild(createVehicleCard(0));
+      }
+
+      if(addVehicleBtn){
+        addVehicleBtn.addEventListener('click', () => {
+          const count = document.querySelectorAll('.vehicle-card').length;
+          vehiclesShell.appendChild(createVehicleCard(count));
+        });
+      }
+
+      if(clearBtn){
+        clearBtn.addEventListener('click', () => {
+          if(confirm('Clear the form?')){
+            form.reset();
+            addInitialVehicle();
+            statusEl.textContent = '';
+            statusEl.classList.remove('success');
+          }
+        });
+      }
+
+      if(newQuoteBtn){
+        newQuoteBtn.addEventListener('click', () => {
+          successPanel.style.display = 'none';
+          form.style.display = 'block';
+          form.reset();
+          addInitialVehicle();
+          statusEl.textContent = '';
+          statusEl.classList.remove('success');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      function gatherFormData(){
+        const data = {};
+        data.fullName = document.getElementById('fullName').value.trim();
+        data.street = document.getElementById('street').value.trim();
+        data.city = document.getElementById('city').value.trim();
+        data.state = document.getElementById('state').value.trim();
+        data.zip = document.getElementById('zip').value.trim();
+        data.dob = document.getElementById('dob').value;
+        data.ownRent = document.getElementById('ownRent').value;
+        data.drivers = document.getElementById('drivers').value.trim();
+        data.tickets = (document.querySelector('input[name="tickets"]:checked') || {}).value || '';
+        data.accidents = (document.querySelector('input[name="accidents"]:checked') || {}).value || '';
+        data.violDetails = document.getElementById('violDetails').value.trim();
+        data.email = document.getElementById('email').value.trim();
+        data.phone = document.getElementById('phone').value.trim();
+        data.contactMethod = document.getElementById('contactMethod').value;
+        data.contactTime = document.getElementById('contactTime').value.trim();
+        data.agentName = document.getElementById('agentName').value;
+        data.agentContact = document.getElementById('agentContact').value;
+        data.consent = document.getElementById('consent').checked;
+
+        const coverages = [];
+        document.querySelectorAll('input[name="coverage"]:checked').forEach(cb => coverages.push(cb.value));
+        data.coverages = coverages;
+
+        const vehicles = [];
+        document.querySelectorAll('.vehicle-card').forEach(card => {
+          const idx = card.dataset.index;
+          const year = card.querySelector(`input[name="vehicle_year_${idx}"]`).value.trim();
+          const make = card.querySelector(`input[name="vehicle_make_${idx}"]`).value.trim();
+          const model = card.querySelector(`input[name="vehicle_model_${idx}"]`).value.trim();
+          const vin = card.querySelector(`input[name="vehicle_vin_${idx}"]`).value.trim();
+          if(year || make || model || vin){
+            vehicles.push({year,make,model,vin});
+          }
+        });
+        data.vehicles = vehicles;
+
+        return data;
+      }
+
+      if(form){
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          statusEl.textContent = '';
+          statusEl.classList.remove('success');
+          const payload = gatherFormData();
+
+          if(!payload.fullName || !payload.email || !payload.phone){
+            statusEl.textContent = 'Please complete name, email, and phone.';
+            return;
+          }
+          if(!payload.consent){
+            statusEl.textContent = 'Please check the consent box so I can contact you.';
+            return;
+          }
+
+          statusEl.textContent = 'Sending…';
+
+          try{
+            const WORKER_URL = 'https://YOUR-WORKER-SUBDOMAIN.workers.dev/quote';
+
+            const res = await fetch(WORKER_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+
+            const json = await res.json().catch(() => ({}));
+
+            if(res.ok){
+              statusEl.textContent = '';
+              statusEl.classList.add('success');
+              form.reset();
+              addInitialVehicle();
+              form.style.display = 'none';
+              successPanel.style.display = 'block';
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }else{
+              statusEl.textContent = json.error || json.message || 'Error sending form. Please try again or text 801-523-2510.';
+            }
+          }catch(err){
+            console.error(err);
+            statusEl.textContent = 'Network error. Please try again or text 801-523-2510.';
+          }        });
+      }
+
+      addInitialVehicle();
+    });
+  </script>
+</body>
+</html>
