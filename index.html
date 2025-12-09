@@ -22,7 +22,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Browser theme color (mobile address bar) -->
-  <meta name="theme-color" content="#020617" />
+  <meta name="theme-color" content="#1d4ed8" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website" />
@@ -33,7 +33,7 @@
   />
   <meta
     property="og:description"
-    content="Short Utah auto &amp; home quote form reviewed personally by a licensed local agent. See if you can save without sacrificing coverage."
+    content="Short Utah auto &amp; home quote form reviewed personally by a local agent. See if you can save without sacrificing coverage."
   />
   <meta
     property="og:image"
@@ -56,14 +56,9 @@
 
   <style>
     :root {
-      --bg: #020617;
-      --bg-gradient-top: #020617;
-      --bg-gradient-bottom: #020617;
-      --card: #ffffff;
       --accent: #2563eb;
       --accent-soft: #1d4ed8;
       --accent-light: #dbeafe;
-      --border: #cbd5f5;
       --muted: #6b7280;
       --text: #0f172a;
       --text-soft: #4b5563;
@@ -73,17 +68,13 @@
 
     * { box-sizing: border-box; }
 
-    html, body { height: 100%; }
+    html, body { height: 100%; margin: 0; }
 
     body {
-      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(37,99,235,0.45) 0, transparent 55%),
-        radial-gradient(circle at bottom right, rgba(14,165,233,0.35) 0, transparent 55%),
-        linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
-      color: var(--text);
       -webkit-font-smoothing: antialiased;
+      background: linear-gradient(to bottom right, #2563eb, #4f46e5);
+      color: var(--text);
     }
 
     .page {
@@ -95,176 +86,101 @@
     /* HEADER */
 
     .site-header {
-      padding: 20px 18px 6px;
+      padding: 18px 16px 8px;
+      color: #e5edff;
     }
 
     .header-inner {
-      max-width: 1080px;
+      max-width: 720px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand-icon-wrapper {
-      width: 60px;
-      height: 60px;
-      border-radius: 20px;
-      padding: 3px;
-      background: radial-gradient(circle at 30% 0%, #60a5fa, #1d4ed8);
+    .header-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
       box-shadow:
-        0 0 0 2px rgba(15,23,42,0.85),
-        0 18px 40px rgba(15,23,42,0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        0 10px 30px rgba(15,23,42,0.55),
+        0 0 0 1px rgba(191,219,254,0.6);
+      object-fit: cover;
+      background: #0b1120;
     }
 
-    .brand-icon {
-      width: 100%;
-      height: 100%;
-      border-radius: 17px;
-      display: block;
+    .header-text-main {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffffff;
     }
 
-    /* MAIN SHELL */
+    .header-text-sub {
+      font-size: 13px;
+      color: #e5edff;
+      opacity: 0.9;
+    }
 
-    .shell {
+    /* MAIN LAYOUT */
+
+    .main-shell {
       flex: 1;
       display: flex;
+      align-items: stretch;
       justify-content: center;
-      padding: 10px 12px 28px;
+      padding: 10px 16px 32px;
     }
 
-    .frame {
+    .card-outer {
       width: 100%;
-      max-width: 1080px;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(191,219,254,0.8) 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(59,130,246,0.5) 0, transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(96,165,250,0.4) 0, transparent 55%),
-        rgba(15,23,42,0.98);
-      border-radius: 28px;
-      padding: 22px;
-      box-shadow:
-        0 40px 90px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(15,23,42,0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .frame::before {
-      content: "";
-      position: absolute;
-      inset: 16px;
-      border-radius: 22px;
-      border: 1px solid rgba(148,163,184,0.55);
-      pointer-events: none;
-      backdrop-filter: blur(4px);
-    }
-
-    .content {
-      position: relative;
-      z-index: 1;
-      max-width: 980px;
+      max-width: 720px;
       margin: 0 auto;
-      padding: 20px 18px 14px;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.99);
-      box-shadow:
-        0 18px 55px rgba(15,23,42,0.6),
-        0 0 0 1px rgba(226,232,240,0.9);
     }
 
-    /* HERO / INTRO */
-
-    .hero {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin-bottom: 18px;
-      align-items: flex-start;
-    }
-
-    .hero-main {
-      flex: 1 1 260px;
+    .hero-header {
+      text-align: left;
+      color: #e5edff;
+      margin-bottom: 12px;
     }
 
     .hero-eyebrow {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 26px;
-      letter-spacing: -0.04em;
-      color: var(--text);
-    }
-
-    .subtitle {
-      margin: 8px 0 12px;
-      font-size: 14px;
-      color: var(--text-soft);
-      max-width: 520px;
-    }
-
-    .hero-points {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 18px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .hero-points li {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-    }
-
-    .hero-check {
-      width: 18px;
-      height: 18px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(22,163,74,0.1);
-      border: 1px solid rgba(34,197,94,0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 11px;
-      color: #15803d;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: rgba(15,23,42,0.35);
+      border: 1px solid rgba(191,219,254,0.35);
     }
 
-    .hero-side {
-      flex: 0 0 240px;
-      font-size: 12px;
-      color: var(--muted);
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(219,234,254,0.99), rgba(191,219,254,0.96));
-      border: 1px solid rgba(148,163,184,0.65);
-      box-shadow: 0 18px 42px rgba(59,130,246,0.4);
+    .hero-title {
+      margin: 8px 0 4px;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffffff;
     }
 
-    .hero-side strong {
-      display: block;
-      font-size: 13px;
-      color: var(--text);
-      margin-bottom: 4px;
+    .hero-subtitle {
+      margin: 0;
+      font-size: 14px;
+      color: #dbeafe;
+      max-width: 520px;
+    }
+
+    /* CARD */
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow:
+        0 30px 70px rgba(15,23,42,0.7),
+        0 0 0 1px rgba(148,163,184,0.35);
+      padding: 20px 18px 16px;
     }
 
     /* PROGRESS */
@@ -273,21 +189,9 @@
       margin-bottom: 16px;
     }
 
-    .progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 5px;
-    }
-
-    .progress-label strong {
-      color: var(--text-soft);
-    }
-
     .progress-track {
       width: 100%;
-      height: 7px;
+      height: 8px;
       border-radius: 999px;
       background: #e5e7eb;
       overflow: hidden;
@@ -298,83 +202,24 @@
       width: 0%;
       border-radius: 999px;
       background: linear-gradient(90deg, #3b82f6, #22c55e);
-      box-shadow: 0 0 0 1px rgba(59,130,246,0.4);
       transition: width 0.25s ease;
     }
 
-    /* LAYOUT */
-
-    .layout {
+    .progress-text-row {
       display: flex;
-      gap: 24px;
-      align-items: flex-start;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-top: 6px;
+      font-size: 12px;
     }
 
-    .sidebar {
-      flex: 0 0 230px;
-      font-size: 13px;
+    .progress-step {
+      font-weight: 600;
       color: var(--text-soft);
-      border-right: 1px solid #e5e7eb;
-      padding-right: 18px;
     }
 
-    .sidebar h2 {
-      font-size: 15px;
-      margin: 0 0 8px;
-      color: var(--text);
-    }
-
-    .steps {
-      list-style: none;
-      margin: 10px 0 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .steps li {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-
-    .step-index {
-      width: 24px;
-      height: 24px;
-      border-radius: 999px;
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      color: var(--accent-soft);
-      background: #eff6ff;
-      flex-shrink: 0;
-      font-weight: 600;
-    }
-
-    .step-index.done {
-      background: #22c55e;
-      border-color: #15803d;
-      color: #ecfdf5;
-    }
-
-    .step-body {
-      font-size: 12px;
+    .progress-hint {
       color: var(--muted);
-    }
-
-    .step-title {
-      font-weight: 600;
-      color: var(--text);
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-
-    .main-form {
-      flex: 1;
-      min-width: 0;
     }
 
     /* FORM SECTIONS */
@@ -383,11 +228,11 @@
 
     .step-panel {
       display: none;
-      border-radius: 16px;
+      border-radius: 14px;
       border: 1px solid #e5e7eb;
       background: #ffffff;
-      padding: 14px 12px 12px;
-      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+      padding: 16px 12px 12px;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.06);
       animation: fadeIn 0.2s ease;
     }
 
@@ -403,35 +248,34 @@
     .section-header {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .section-title {
-      font-size: 15px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text);
-    }
-
-    .section-title-badge {
-      width: 18px;
-      height: 18px;
+    .section-icon-pill {
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
       background: #dbeafe;
       border: 1px solid #60a5fa;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 14px;
       color: var(--accent-soft);
+      font-weight: 600;
     }
 
-    .section-tag {
-      font-size: 11px;
+    .section-title-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .section-tagline {
+      font-size: 12px;
       color: var(--muted);
+      margin-left: auto;
     }
 
     .section-body {
@@ -462,7 +306,9 @@
       min-width: 0;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
       width: 100%;
       border-radius: 12px;
       border: 1px solid #d1d5db;
@@ -485,8 +331,8 @@
       border-color: var(--accent);
       background: #ffffff;
       box-shadow:
-        0 0 0 1px rgba(59,130,246,0.7),
-        0 0 0 8px rgba(191,219,254,0.8);
+        0 0 0 1px rgba(59,130,246,0.6),
+        0 0 0 8px rgba(191,219,254,0.75);
       transform: translateY(-0.5px);
     }
 
@@ -516,7 +362,7 @@
     .inline-options {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 10px;
       font-size: 13px;
     }
 
@@ -527,7 +373,7 @@
       gap: 6px;
       background: #f9fafb;
       border-radius: 999px;
-      padding: 6px 10px;
+      padding: 6px 11px;
       border: 1px solid #e5e7eb;
       cursor: pointer;
       color: var(--text-soft);
@@ -573,7 +419,7 @@
       margin-bottom: 6px;
     }
 
-    /* Dynamic list sections */
+    /* Dynamic lists */
 
     .dynamic-list {
       display: flex;
@@ -636,6 +482,7 @@
       align-items: center;
       gap: 6px;
       cursor: pointer;
+      margin-top: 4px;
     }
 
     .btn-chip span.icon {
@@ -650,22 +497,24 @@
       color: #4b5563;
     }
 
-    /* CONTROLS & STATUS */
+    /* BUTTONS / STATUS */
 
     .controls-bar {
       display: flex;
-      gap: 10px;
-      margin-top: 12px;
+      justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
       flex-wrap: wrap;
-      justify-content: flex-start;
     }
 
     .btn-primary {
       border-radius: 999px;
       border: none;
       padding: 10px 18px;
-      background: linear-gradient(135deg, var(--accent) 0, var(--accent-soft) 100%);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       font-weight: 600;
       font-size: 14px;
@@ -676,8 +525,6 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      position: relative;
-      overflow: hidden;
       transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
     }
 
@@ -723,6 +570,8 @@
       font-size: 11px;
       color: var(--muted);
       min-height: 18px;
+      flex: 1;
+      text-align: right;
     }
 
     #status.error {
@@ -744,7 +593,7 @@
 
     #successPanel {
       display: none;
-      padding: 32px 18px 22px;
+      padding: 28px 16px 18px;
       text-align: center;
     }
 
@@ -753,8 +602,8 @@
     }
 
     .success-icon {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 999px;
       margin: 0 auto 14px;
       border: 2px solid #22c55e;
@@ -762,7 +611,7 @@
       align-items: center;
       justify-content: center;
       color: #22c55e;
-      font-size: 30px;
+      font-size: 34px;
       background: #ecfdf5;
       box-shadow: 0 0 0 8px rgba(34,197,94,0.3);
     }
@@ -787,7 +636,7 @@
       font-size: 11px;
       color: var(--muted);
       text-align: left;
-      max-width: 540px;
+      max-width: 520px;
       margin-left: auto;
       margin-right: auto;
     }
@@ -802,71 +651,45 @@
       margin-top: 10px;
       font-size: 11px;
       text-align: left;
-      color: var(--muted);
+      color: #e5edff;
+      opacity: 0.9;
     }
 
     footer strong {
-      color: var(--text-soft);
+      color: #ffffff;
     }
 
     /* RESPONSIVE */
 
-    @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .sidebar {
-        border-right: none;
-        border-bottom: 1px solid #e5e7eb;
-        padding-right: 0;
-        padding-bottom: 10px;
-      }
-
-      .hero-side {
-        order: 2;
-      }
-
-      .hero-main {
-        order: 1;
-      }
-    }
-
     @media (max-width: 640px) {
-      .frame {
-        padding: 16px 10px;
-        border-radius: 24px;
-      }
-
-      .content {
-        padding: 14px 12px 10px;
-      }
-
       .site-header {
-        padding: 14px 10px 2px;
+        padding-top: 14px;
       }
-
       .header-inner {
         flex-direction: row;
-        justify-content: center;
+        align-items: center;
       }
-
-      .shell {
-        padding: 8px 8px 24px;
+      .hero-header {
+        text-align: left;
       }
-
+      .card {
+        padding: 16px 12px 14px;
+      }
       .row {
         flex-direction: column;
       }
-
+      .controls-bar {
+        flex-direction: column-reverse;
+        align-items: stretch;
+      }
       .btn-primary,
       .btn-ghost {
         width: 100%;
         justify-content: center;
+      }
+      #status {
         text-align: center;
       }
-
       footer {
         text-align: center;
       }
@@ -875,323 +698,275 @@
 </head>
 <body>
   <div class="page">
+    <!-- TOP HEADER with logo + wording -->
     <header class="site-header">
       <div class="header-inner">
-        <div class="brand">
-          <!-- Logo: make sure this file exists in your repo root -->
-          <div class="brand-icon-wrapper">
-            <img src="utah-rate-check-icon.png" alt="Utah Rate Check" class="brand-icon">
-          </div>
+        <img src="utah-rate-check-icon.png" alt="Utah Rate Check logo" class="header-logo">
+        <div>
+          <div class="header-text-main">Utah Rate Check</div>
+          <div class="header-text-sub">Quick auto &amp; home insurance quotes with Reece</div>
         </div>
       </div>
     </header>
 
-    <main class="shell">
-      <div class="frame">
-        <div class="content">
-          <!-- HERO / INTRO -->
-          <section class="hero">
-            <div class="hero-main">
-              <div class="hero-eyebrow">QUOTE REQUEST</div>
-              <h1>Check your Utah auto &amp; home rate in about 30 seconds.</h1>
-              <p class="subtitle">
-                Answer a few quick questions below. Reece will personally review your information and send back a custom quote — no call center, no spam.
-              </p>
-              <ul class="hero-points">
-                <li><span class="hero-check">✓</span> One local agent helping you start to finish</li>
-                <li><span class="hero-check">✓</span> Compare coverage &amp; price, not just price</li>
-                <li><span class="hero-check">✓</span> Bundle auto + home or renters for extra savings</li>
-              </ul>
-            </div>
-            <aside class="hero-side">
-              <strong>What to expect</strong>
-              You’ll fill out this secure form, then Reece will follow up by call, text, or email with options tailored to your coverage needs.
-              <br><br>
-              Typical response time: <strong>Same business day</strong>.
-            </aside>
-          </section>
+    <main class="main-shell">
+      <div class="card-outer">
+        <!-- Hero copy (like the React header area, but above the card) -->
+        <div class="hero-header">
+          <div class="hero-eyebrow">QUOTE REQUEST</div>
+          <h1 class="hero-title">Get your free Utah insurance quote.</h1>
+          <p class="hero-subtitle">
+            Complete this quick form and Reece will prepare your personalized auto and home options — no spam, no pressure.
+          </p>
+        </div>
 
+        <!-- Main white card -->
+        <div class="card">
           <!-- PROGRESS -->
           <div class="progress-shell">
-            <div class="progress-label">
-              <strong id="stepLabel">Step 1 of 3</strong>
-              <span id="stepHint">Your details &amp; what you need</span>
-            </div>
             <div class="progress-track">
               <div class="progress-bar" id="progressBar"></div>
             </div>
+            <div class="progress-text-row">
+              <span class="progress-step" id="stepLabel">Step 1 of 3</span>
+              <span class="progress-hint" id="stepHint">Your details &amp; what you need</span>
+            </div>
           </div>
 
-          <!-- LAYOUT: SIDEBAR + FORM -->
-          <div class="layout">
-            <aside class="sidebar">
-              <h2>3 quick steps</h2>
-              <ul class="steps">
-                <li>
-                  <div class="step-index" id="stepBullet1">1</div>
-                  <div class="step-body">
-                    <div class="step-title">About you</div>
-                    Basic contact info, drivers &amp; what you need.
+          <!-- MULTI-STEP FORM -->
+          <form id="quoteForm" novalidate>
+            <!-- STEP 1 -->
+            <div class="step-panel active" data-step="1">
+              <div class="section-header">
+                <div class="section-icon-pill">1</div>
+                <div class="section-title-text">Contact &amp; drivers</div>
+                <div class="section-tagline">Takes about 30 seconds.</div>
+              </div>
+              <div class="section-body">
+                <div class="row">
+                  <div class="col field-group">
+                    <label for="firstName">First name</label>
+                    <input id="firstName" name="firstName" autocomplete="given-name" required>
                   </div>
-                </li>
-                <li>
-                  <div class="step-index" id="stepBullet2">2</div>
-                  <div class="step-body">
-                    <div class="step-title">Vehicles</div>
-                    Vehicles to include and your quote goals.
-                  </div>
-                </li>
-                <li>
-                  <div class="step-index" id="stepBullet3">3</div>
-                  <div class="step-body">
-                    <div class="step-title">Home &amp; final send</div>
-                    Optional home/renters info &amp; consent.
-                  </div>
-                </li>
-              </ul>
-            </aside>
-
-            <section class="main-form">
-              <!-- MULTI-STEP FORM -->
-              <form id="quoteForm" novalidate>
-                <!-- STEP 1 -->
-                <div class="step-panel active" data-step="1">
-                  <div class="section-header">
-                    <div class="section-title">
-                      <div class="section-title-badge">1</div>
-                      About you
-                    </div>
-                    <div class="section-tag">Takes about 30 seconds.</div>
-                  </div>
-                  <div class="section-body">
-                    <div class="row">
-                      <div class="col field-group">
-                        <label for="firstName">First name</label>
-                        <input id="firstName" name="firstName" autocomplete="given-name" required>
-                      </div>
-                      <div class="col field-group">
-                        <label for="lastName">Last name</label>
-                        <input id="lastName" name="lastName" autocomplete="family-name" required>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col field-group">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email" autocomplete="email" required>
-                        <p class="field-note">We’ll send your quote details here.</p>
-                      </div>
-                      <div class="col field-group">
-                        <label for="phone">Mobile number</label>
-                        <input id="phone" name="phone" type="tel" autocomplete="tel" required>
-                        <p class="field-note">For quick questions about your quote.</p>
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="col field-group">
-                        <label for="zip">ZIP code</label>
-                        <input id="zip" name="zip" inputmode="numeric" maxlength="5" required>
-                      </div>
-                      <div class="col field-group">
-                        <label for="contactPreference">How do you prefer Reece contacts you?</label>
-                        <select id="contactPreference" name="contactPreference">
-                          <option value="">Choose one</option>
-                          <option value="call">Call</option>
-                          <option value="text">Text</option>
-                          <option value="email">Email</option>
-                          <option value="call_text">Call or text</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="field-group">
-                      <label for="bestTime">Best time of day to reach you</label>
-                      <input id="bestTime" name="bestTime" placeholder="Morning, lunch, afternoon, or a specific time window">
-                    </div>
-
-                    <div class="field-group">
-                      <label>What would you like quoted?</label>
-                      <div class="inline-options">
-                        <label>
-                          <input type="checkbox" id="needAuto" name="needAuto" checked>
-                          Auto
-                        </label>
-                        <label>
-                          <input type="checkbox" id="needHome" name="needHome">
-                          Home / renters
-                        </label>
-                      </div>
-                      <p class="field-note">You can choose one or both — bundling often saves the most.</p>
-                    </div>
-
-                    <!-- Additional drivers -->
-                    <div class="field-group">
-                      <label>Additional drivers (optional)</label>
-                      <div id="driversList" class="dynamic-list"></div>
-                      <button type="button" class="btn-chip" id="addDriverBtn">
-                        <span class="icon">+</span>
-                        Add driver
-                      </button>
-                      <p class="field-note">Add any additional household drivers you want included on the quote.</p>
-                    </div>
+                  <div class="col field-group">
+                    <label for="lastName">Last name</label>
+                    <input id="lastName" name="lastName" autocomplete="family-name" required>
                   </div>
                 </div>
 
-                <!-- STEP 2 -->
-                <div class="step-panel" data-step="2">
-                  <div class="section-header">
-                    <div class="section-title">
-                      <div class="section-title-badge">2</div>
-                      Vehicles
-                    </div>
-                    <div class="section-tag">Tell us about the car(s) you want quoted.</div>
+                <div class="row">
+                  <div class="col field-group">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" required>
+                    <p class="field-note">We’ll send your quote details here.</p>
                   </div>
-                  <div class="section-body">
-                    <!-- Structured vehicles -->
-                    <div class="field-group">
-                      <label>Vehicles to quote (year, make, model)</label>
-                      <div id="vehiclesList" class="dynamic-list"></div>
-                      <button type="button" class="btn-chip" id="addVehicleBtn">
-                        <span class="icon">+</span>
-                        Add vehicle
-                      </button>
-                      <p class="field-note">Add each vehicle you’d like us to include in your quote.</p>
-                    </div>
-
-                    <!-- Existing free-text summary (kept as requested) -->
-                    <div class="field-group">
-                      <label for="vehiclesSummary">Anything else about your vehicles?</label>
-                      <textarea id="vehiclesSummary" name="vehiclesSummary" placeholder="Example: 2020 Honda Civic EX, 2018 Toyota Highlander Limited. Include who drives what if there are multiple drivers, or any custom details you want us to know."></textarea>
-                    </div>
-
-                    <div class="row">
-                      <div class="col field-group">
-                        <label for="currentInsurer">Who are you currently insured with?</label>
-                        <input id="currentInsurer" name="currentInsurer" placeholder="If none, type “No current insurance”">
-                      </div>
-                      <div class="col field-group">
-                        <label for="monthsInsured">How long have you been insured continuously?</label>
-                        <select id="monthsInsured" name="monthsInsured">
-                          <option value="">Select</option>
-                          <option value="0-6">0–6 months</option>
-                          <option value="6-12">6–12 months</option>
-                          <option value="12-36">1–3 years</option>
-                          <option value="36-999">3+ years</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="field-group">
-                      <label for="accidentsClaims">Any at-fault accidents, tickets, or claims in the last 3 years?</label>
-                      <textarea id="accidentsClaims" name="accidentsClaims" placeholder="A quick note is fine: “1 speeding ticket in 2023”, “rear-end accident June 2024”, etc."></textarea>
-                    </div>
-
-                    <div class="field-group">
-                      <label for="coverageGoals">What are you hoping to accomplish with this quote?</label>
-                      <textarea id="coverageGoals" name="coverageGoals" placeholder="Examples: “Save money without cutting coverage”, “raise limits and add better protection”, “compare with current policy.”"></textarea>
-                    </div>
+                  <div class="col field-group">
+                    <label for="phone">Mobile number</label>
+                    <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                    <p class="field-note">For quick questions about your quote.</p>
                   </div>
                 </div>
 
-                <!-- STEP 3 -->
-                <div class="step-panel" data-step="3">
-                  <div class="section-header">
-                    <div class="section-title">
-                      <div class="section-title-badge">3</div>
-                      Home &amp; send request
-                    </div>
-                    <div class="section-tag">Optional home/renters details + final send.</div>
+                <div class="row">
+                  <div class="col field-group">
+                    <label for="zip">ZIP code</label>
+                    <input id="zip" name="zip" inputmode="numeric" maxlength="5" required>
                   </div>
-                  <div class="section-body">
-                    <div id="homeSection" class="home-extra" style="display:none;">
-                      <div class="home-extra-heading">Home / renters details (optional)</div>
-
-                      <div class="row">
-                        <div class="col field-group">
-                          <label for="homeType">Type of property</label>
-                          <select id="homeType" name="homeType">
-                            <option value="">Select</option>
-                            <option value="home">Single-family home</option>
-                            <option value="condo">Condo</option>
-                            <option value="townhome">Townhome</option>
-                            <option value="renters">Renters policy</option>
-                            <option value="landlord">Landlord / rental property</option>
-                          </select>
-                        </div>
-                        <div class="col field-group">
-                          <label for="homeYearBuilt">Year built (approximate is OK)</label>
-                          <input id="homeYearBuilt" name="homeYearBuilt" inputmode="numeric">
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col field-group">
-                          <label for="homeSquareFeet">Approx. square footage</label>
-                          <input id="homeSquareFeet" name="homeSquareFeet" inputmode="numeric">
-                        </div>
-                        <div class="col field-group">
-                          <label for="homeRoofYear">Approx. roof age</label>
-                          <input id="homeRoofYear" name="homeRoofYear" placeholder="Example: new in 2019">
-                        </div>
-                      </div>
-
-                      <div class="field-group">
-                        <label for="homeNotes">Anything else about the home you’d like Reece to know?</label>
-                        <textarea id="homeNotes" name="homeNotes" placeholder="Finished basement, trampoline, dogs, security system, recent updates, etc."></textarea>
-                      </div>
-                    </div>
-
-                    <div class="field-group">
-                      <label for="extraNotes">Anything else you’d like to share?</label>
-                      <textarea id="extraNotes" name="extraNotes" placeholder="Timing for your renewal, specific questions, or anything you want us to prioritize."></textarea>
-                    </div>
-
-                    <div class="pill-consent">
-                      <input type="checkbox" id="consent" name="consent" required>
-                      <label for="consent">
-                        <strong>Consent to contact</strong>
-                        By submitting, you agree that Reece may contact you by call, text, or email about this quote. Message/data rates may apply. You can opt out at any time.
-                      </label>
-                    </div>
+                  <div class="col field-group">
+                    <label for="contactPreference">How do you prefer Reece contacts you?</label>
+                    <select id="contactPreference" name="contactPreference">
+                      <option value="">Choose one</option>
+                      <option value="call">Call</option>
+                      <option value="text">Text</option>
+                      <option value="email">Email</option>
+                      <option value="call_text">Call or text</option>
+                    </select>
                   </div>
                 </div>
 
-                <div class="controls-bar">
-                  <button type="button" class="btn-ghost" id="backBtn" hidden>Back</button>
-                  <button type="button" class="btn-primary" id="nextBtn">
-                    <span class="icon">→</span>
-                    <span id="nextBtnLabel">Next</span>
+                <div class="field-group">
+                  <label for="bestTime">Best time of day to reach you</label>
+                  <input id="bestTime" name="bestTime" placeholder="Morning, lunch, afternoon, or a specific time window">
+                </div>
+
+                <div class="field-group">
+                  <label>What would you like quoted?</label>
+                  <div class="inline-options">
+                    <label>
+                      <input type="checkbox" id="needAuto" name="needAuto" checked>
+                      Auto
+                    </label>
+                    <label>
+                      <input type="checkbox" id="needHome" name="needHome">
+                      Home / renters
+                    </label>
+                  </div>
+                  <p class="field-note">You can choose one or both — bundling often saves the most.</p>
+                </div>
+
+                <!-- Additional drivers -->
+                <div class="field-group">
+                  <label>Additional drivers (optional)</label>
+                  <div id="driversList" class="dynamic-list"></div>
+                  <button type="button" class="btn-chip" id="addDriverBtn">
+                    <span class="icon">+</span>
+                    Add driver
                   </button>
-                  <div id="status"></div>
-                </div>
-              </form>
-
-              <!-- SUCCESS PANEL -->
-              <div id="successPanel">
-                <div class="success-icon">✓</div>
-                <h2>Thank you — your quote request is in!</h2>
-                <p>
-                  We’ve received your information. Reece will review everything and reach out with your custom quote and any follow-up questions.
-                </p>
-                <p>
-                  If you need to update anything, you can reply directly to the quote email when it arrives.
-                </p>
-                <div class="privacy-note">
-                  <strong>Your information stays with us.</strong>
-                  We use your details only to prepare insurance quotes and recommendations. We don’t sell your information to third parties.
+                  <p class="field-note">Add any additional household drivers you want included on the quote.</p>
                 </div>
               </div>
+            </div>
 
-              <footer>
-                <p>
-                  <strong>Utah Rate Check</strong> – a local independent quote request form.
-                  This form does not bind or change coverage. Quotes are subject to underwriting guidelines.
-                </p>
-              </footer>
-            </section>
+            <!-- STEP 2 -->
+            <div class="step-panel" data-step="2">
+              <div class="section-header">
+                <div class="section-icon-pill">2</div>
+                <div class="section-title-text">Vehicles</div>
+                <div class="section-tagline">Which cars should we include?</div>
+              </div>
+              <div class="section-body">
+                <!-- Structured vehicles -->
+                <div class="field-group">
+                  <label>Vehicles to quote (year, make, model)</label>
+                  <div id="vehiclesList" class="dynamic-list"></div>
+                  <button type="button" class="btn-chip" id="addVehicleBtn">
+                    <span class="icon">+</span>
+                    Add vehicle
+                  </button>
+                  <p class="field-note">Add each vehicle you’d like us to include in your quote.</p>
+                </div>
+
+                <!-- Existing free-text summary (kept as requested) -->
+                <div class="field-group">
+                  <label for="vehiclesSummary">Anything else about your vehicles?</label>
+                  <textarea id="vehiclesSummary" name="vehiclesSummary" placeholder="Example: 2020 Honda Civic EX, 2018 Toyota Highlander Limited. Include who drives what if there are multiple drivers, or any custom details you want us to know."></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col field-group">
+                    <label for="currentInsurer">Who are you currently insured with?</label>
+                    <input id="currentInsurer" name="currentInsurer" placeholder="If none, type “No current insurance”">
+                  </div>
+                  <div class="col field-group">
+                    <label for="monthsInsured">How long have you been insured continuously?</label>
+                    <select id="monthsInsured" name="monthsInsured">
+                      <option value="">Select</option>
+                      <option value="0-6">0–6 months</option>
+                      <option value="6-12">6–12 months</option>
+                      <option value="12-36">1–3 years</option>
+                      <option value="36-999">3+ years</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="field-group">
+                  <label for="accidentsClaims">Any at-fault accidents, tickets, or claims in the last 3 years?</label>
+                  <textarea id="accidentsClaims" name="accidentsClaims" placeholder="A quick note is fine: “1 speeding ticket in 2023”, “rear-end accident June 2024”, etc."></textarea>
+                </div>
+
+                <div class="field-group">
+                  <label for="coverageGoals">What are you hoping to accomplish with this quote?</label>
+                  <textarea id="coverageGoals" name="coverageGoals" placeholder="Examples: “Save money without cutting coverage”, “raise limits and add better protection”, “compare with current policy.”"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step-panel" data-step="3">
+              <div class="section-header">
+                <div class="section-icon-pill">3</div>
+                <div class="section-title-text">Home &amp; send request</div>
+                <div class="section-tagline">Optional home details + consent.</div>
+              </div>
+              <div class="section-body">
+                <div id="homeSection" class="home-extra" style="display:none;">
+                  <div class="home-extra-heading">Home / renters details (optional)</div>
+
+                  <div class="row">
+                    <div class="col field-group">
+                      <label for="homeType">Type of property</label>
+                      <select id="homeType" name="homeType">
+                        <option value="">Select</option>
+                        <option value="home">Single-family home</option>
+                        <option value="condo">Condo</option>
+                        <option value="townhome">Townhome</option>
+                        <option value="renters">Renters policy</option>
+                        <option value="landlord">Landlord / rental property</option>
+                      </select>
+                    </div>
+                    <div class="col field-group">
+                      <label for="homeYearBuilt">Year built (approximate is OK)</label>
+                      <input id="homeYearBuilt" name="homeYearBuilt" inputmode="numeric">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col field-group">
+                      <label for="homeSquareFeet">Approx. square footage</label>
+                      <input id="homeSquareFeet" name="homeSquareFeet" inputmode="numeric">
+                    </div>
+                    <div class="col field-group">
+                      <label for="homeRoofYear">Approx. roof age</label>
+                      <input id="homeRoofYear" name="homeRoofYear" placeholder="Example: new in 2019">
+                    </div>
+                  </div>
+
+                  <div class="field-group">
+                    <label for="homeNotes">Anything else about the home you’d like Reece to know?</label>
+                    <textarea id="homeNotes" name="homeNotes" placeholder="Finished basement, trampoline, dogs, security system, recent updates, etc."></textarea>
+                  </div>
+                </div>
+
+                <div class="field-group">
+                  <label for="extraNotes">Anything else you’d like to share?</label>
+                  <textarea id="extraNotes" name="extraNotes" placeholder="Timing for your renewal, specific questions, or anything you want us to prioritize."></textarea>
+                </div>
+
+                <div class="pill-consent">
+                  <input type="checkbox" id="consent" name="consent" required>
+                  <label for="consent">
+                    <strong>Consent to contact</strong>
+                    By submitting, you agree that Reece may contact you by call, text, or email about this quote. Message/data rates may apply. You can opt out at any time.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- NAV + STATUS -->
+            <div class="controls-bar">
+              <button type="button" class="btn-ghost" id="backBtn" hidden>Back</button>
+              <button type="button" class="btn-primary" id="nextBtn">
+                <span class="icon">→</span>
+                <span id="nextBtnLabel">Next</span>
+              </button>
+              <div id="status"></div>
+            </div>
+          </form>
+
+          <!-- SUCCESS PANEL -->
+          <div id="successPanel">
+            <div class="success-icon">✓</div>
+            <h2>Thank you — your quote request is in!</h2>
+            <p>
+              We’ve received your information. Reece will review everything and reach out with your custom quote and any follow-up questions.
+            </p>
+            <p>
+              If you need to update anything, you can reply directly to the quote email when it arrives.
+            </p>
+            <div class="privacy-note">
+              <strong>Your information stays with us.</strong>
+              We use your details only to prepare insurance quotes and recommendations. We don’t sell your information to third parties.
+            </div>
           </div>
         </div>
+
+        <!-- Footer lives on the gradient, under the card -->
+        <footer>
+          <p>
+            <strong>Utah Rate Check</strong> – local quote requests reviewed by a licensed agency.
+            This form does not bind or change coverage. Quotes are subject to underwriting guidelines.
+          </p>
+        </footer>
       </div>
     </main>
   </div>
@@ -1213,11 +988,6 @@
     const statusEl = document.getElementById("status");
     const successPanel = document.getElementById("successPanel");
     const form = document.getElementById("quoteForm");
-    const stepBullets = [
-      document.getElementById("stepBullet1"),
-      document.getElementById("stepBullet2"),
-      document.getElementById("stepBullet3")
-    ];
     const needHomeCheckbox = document.getElementById("needHome");
     const homeSection = document.getElementById("homeSection");
 
@@ -1232,14 +1002,6 @@
         panel.classList.toggle("active", s === currentStep);
       });
 
-      for (let i = 0; i < stepBullets.length; i++) {
-        if (i + 1 < currentStep) {
-          stepBullets[i].classList.add("done");
-        } else {
-          stepBullets[i].classList.remove("done");
-        }
-      }
-
       const pct = (currentStep - 1) / (totalSteps - 1) * 100;
       progressBar.style.width = pct + "%";
 
@@ -1250,15 +1012,6 @@
         stepHint.textContent = "Vehicles for your quote";
       } else {
         stepHint.textContent = "Home details (optional) & send request";
-      }
-
-      backBtn.hidden = currentStep === 1;
-      if (currentStep === totalSteps) {
-        nextBtnLabel.textContent = "Submit quote request";
-        nextBtn.querySelector(".icon").textContent = "✓";
-      } else {
-        nextBtnLabel.textContent = "Next";
-        nextBtn.querySelector(".icon").textContent = "→";
       }
     }
 
@@ -1524,8 +1277,7 @@
         statusEl.className = "success";
         statusEl.textContent = "";
 
-        // Mark all steps done and progress complete
-        stepBullets.forEach(b => b.classList.add("done"));
+        // Progress bar full
         progressBar.style.width = "100%";
         stepLabel.textContent = "All steps complete";
         stepHint.textContent = "Reece will follow up with your custom quote.";
