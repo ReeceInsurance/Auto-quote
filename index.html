@@ -74,7 +74,7 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-      /* More BLUE, still glowy */
+      /* 💙 KEEPING YOUR BLUE BACKGROUND EXACTLY AS IS */
       background:
         radial-gradient(circle at top, #1d4ed8 0, #020617 60%, #020617 100%);
       color: var(--text);
@@ -87,10 +87,10 @@
       flex-direction: column;
     }
 
-    /* TOP LOGO – larger, but tighter spacing */
+    /* TOP LOGO – larger, fills space better */
 
     .site-header {
-      padding: 4px 10px 0;
+      padding: 8px 10px 0;
       text-align: center;
     }
 
@@ -100,13 +100,13 @@
     }
 
     .top-logo {
-      width: 180px;
-      max-width: 70%;
+      width: 260px;
+      max-width: 80%;
       height: auto;
       display: inline-block;
       filter:
-        drop-shadow(0px 3px 9px rgba(59, 130, 246, 0.7))
-        drop-shadow(0px 14px 32px rgba(15, 23, 42, 0.95));
+        drop-shadow(0px 4px 10px rgba(59, 130, 246, 0.8))
+        drop-shadow(0px 18px 36px rgba(15, 23, 42, 0.95));
     }
 
     /* MAIN SHELL */
@@ -115,7 +115,7 @@
       flex: 1;
       display: flex;
       justify-content: center;
-      padding: 4px 10px 24px;
+      padding: 6px 10px 24px;
     }
 
     .frame {
@@ -346,8 +346,20 @@
       border-color: #16a34a;
       color: #ecfdf5;
       box-shadow:
-        0 0 0 1px rgba(22,163,74,0.9),
+        0 0 0 2px rgba(22,163,74,0.85),
         0 0 14px rgba(22,163,74,0.9);
+    }
+
+    /* EXTRA glow for final completion */
+    .step-index.final {
+      background: #22c55e;
+      border-color: #16a34a;
+      color: #ecfdf5;
+      box-shadow:
+        0 0 0 2px rgba(22,163,74,0.95),
+        0 0 22px rgba(22,163,74,1),
+        0 8px 22px rgba(22,163,74,0.9);
+      transform: translateY(-1px);
     }
 
     .step-body {
@@ -370,7 +382,7 @@
       max-height: 560px;
     }
 
-    /* FORM SECTIONS – LIGHT INNER PAGE */
+    /* FORM SECTIONS – WHITE INNER PAGES */
 
     form {
       margin-top: 4px;
@@ -386,7 +398,7 @@
       border: 1px solid #d1d5db;
       background:
         radial-gradient(circle at top left, rgba(191,219,254,0.75) 0, transparent 60%),
-        #f9fafb;
+        #ffffff; /* inner page white */
       padding: 14px 12px 12px;
       box-shadow:
         0 10px 30px rgba(15,23,42,0.35),
@@ -925,11 +937,11 @@
       }
 
       .site-header {
-        padding: 4px 8px 0;
+        padding: 6px 8px 0;
       }
 
       .shell {
-        padding: 4px 8px 20px;
+        padding: 6px 8px 20px;
       }
 
       .row {
@@ -951,7 +963,7 @@
 </head>
 <body>
   <div class="page">
-    <!-- SMALL FLOATING LOGO -->
+    <!-- TOP LOGO -->
     <header class="site-header">
       <div class="header-inner">
         <img src="utah-rate-check-logo.png" alt="Utah Rate Check" class="top-logo">
@@ -1017,7 +1029,7 @@
                   <div class="step-index" id="stepBullet3">3</div>
                   <div class="step-body">
                     <div class="step-title">Home &amp; final send</div>
-                    Optional home/renters info &amp; consent.
+                    Home/renters info &amp; consent.
                   </div>
                 </li>
               </ul>
@@ -1177,11 +1189,12 @@
                       <div class="section-title-badge">3</div>
                       Home &amp; send request
                     </div>
-                    <div class="section-tag">Optional home/renters details + final send.</div>
+                    <div class="section-tag">Home/renters details + final send.</div>
                   </div>
                   <div class="section-body">
-                    <div id="homeSection" class="home-extra" style="display:none;">
-                      <div class="home-extra-heading">Home / renters details (optional)</div>
+                    <!-- Home questions ALWAYS visible now -->
+                    <div id="homeSection" class="home-extra">
+                      <div class="home-extra-heading">Home / renters details (optional but helpful)</div>
 
                       <div class="row">
                         <div class="col field-group">
@@ -1275,7 +1288,6 @@
 
   <script>
     // === CONFIG ===
-    // Update this if your worker URL is different:
     const WORKER_URL = "https://auto-quote-worker.p-reece159.workers.dev/";
 
     const totalSteps = 3;
@@ -1296,8 +1308,6 @@
       document.getElementById("stepBullet2"),
       document.getElementById("stepBullet3")
     ];
-    const needHomeCheckbox = document.getElementById("needHome");
-    const homeSection = document.getElementById("homeSection");
 
     // Vehicles
     const vehiclesShell = document.getElementById("vehiclesShell");
@@ -1350,8 +1360,9 @@
         panel.classList.toggle("active", s === currentStep);
       });
 
-      // Make step bullets glow green up to and including the current step
+      // Glow bullets green up to and including current step
       for (let i = 0; i < stepBullets.length; i++) {
+        stepBullets[i].classList.remove("final"); // reset final glow
         if (i + 1 <= currentStep) {
           stepBullets[i].classList.add("done");
         } else {
@@ -1368,7 +1379,7 @@
       } else if (currentStep === 2) {
         stepHint.textContent = "Vehicles for your quote";
       } else {
-        stepHint.textContent = "Home details (optional) & send request";
+        stepHint.textContent = "Home details & send request";
       }
 
       backBtn.hidden = currentStep === 1;
@@ -1380,13 +1391,6 @@
         nextBtn.querySelector(".icon").textContent = "→";
       }
     }
-
-    function showHomeSectionIfNeeded() {
-      homeSection.style.display = needHomeCheckbox.checked ? "block" : "none";
-    }
-
-    needHomeCheckbox.addEventListener("change", showHomeSectionIfNeeded);
-    showHomeSectionIfNeeded();
 
     backBtn.addEventListener("click", () => {
       if (currentStep > 1) {
@@ -1508,8 +1512,11 @@
 
       const { vehicles, vehiclesSummary } = collectVehicles();
 
+      const hasHomeData =
+        homeType || homeYearBuilt || homeSquareFeet || homeRoofYear || homeNotes;
+
       let homeSummary = "";
-      if (needHome) {
+      if (hasHomeData || needHome) {
         homeSummary =
           `Home quote requested:\n` +
           (homeType ? `• Property type: ${homeType}\n` : "") +
@@ -1567,9 +1574,12 @@
           throw new Error("Request failed with status " + res.status);
         }
 
-        // Make sure step 3 bullet is green on success
+        // Finalize UI: show step 3 as fully completed (extra glow)
         currentStep = 3;
         updateStepUI();
+        if (stepBullets[2]) {
+          stepBullets[2].classList.add("final");
+        }
 
         form.style.display = "none";
         successPanel.classList.add("active");
