@@ -5,35 +5,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>Utah Rate Check – Fast Auto &amp; Home Insurance Quotes</title>
+  <title>Utah Rate Check – Quick Auto &amp; Home Insurance Quotes</title>
 
   <meta
     name="description"
-    content="Check Utah auto and home insurance rates in about 30 seconds. Fill out a quick quote form and get a personalized review from licensed agent Reece – no pressure, no spam."
+    content="Get a quick Utah auto and home insurance quote. Fill out a short form and Reece will personally review your rates and coverage options – no spam, no pressure."
   />
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://utahratecheck.com/" />
 
-  <!-- Favicons / app icons -->
+  <!-- Favicons / app icons (optional – add these files later if you want) -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
   <!-- Browser theme color (mobile address bar) -->
-  <meta name="theme-color" content="#1E5DBE" />
+  <meta name="theme-color" content="#1E3A8A" />
 
   <!-- Social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://utahratecheck.com/" />
   <meta
     property="og:title"
-    content="Utah Rate Check – Fast Auto & Home Insurance Quotes"
+    content="Utah Rate Check – Quick Auto &amp; Home Insurance Quotes"
   />
   <meta
     property="og:description"
-    content="Quick Utah auto & home quote form reviewed personally by a licensed agent. See if you can save without hurting your coverage."
+    content="Short Utah auto &amp; home quote form reviewed personally by a licensed agent. See if you can save without sacrificing coverage."
   />
   <meta
     property="og:image"
@@ -43,11 +43,11 @@
   <meta name="twitter:url" content="https://utahratecheck.com/" />
   <meta
     name="twitter:title"
-    content="Utah Rate Check – Fast Auto & Home Insurance Quotes"
+    content="Utah Rate Check – Quick Auto &amp; Home Insurance Quotes"
   />
   <meta
     name="twitter:description"
-    content="Check Utah auto and home insurance rates in about 30 seconds with a simple quote form."
+    content="Check Utah auto and home insurance rates with a simple multi-step quote form."
   />
   <meta
     name="twitter:image"
@@ -56,7 +56,9 @@
 
   <style>
     :root {
-      --bg: #e5edf8;
+      --bg: #020617;          /* deep navy like your logo background */
+      --bg-gradient-top: #0b1220;
+      --bg-gradient-bottom: #020617;
       --card: #ffffff;
       --accent: #2563eb;
       --accent-soft: #1d4ed8;
@@ -77,9 +79,9 @@
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(59,130,246,0.18) 0, transparent 55%),
-        radial-gradient(circle at bottom right, rgba(59,130,246,0.18) 0, transparent 55%),
-        var(--bg);
+        radial-gradient(circle at top left, rgba(37,99,235,0.35) 0, transparent 55%),
+        radial-gradient(circle at bottom right, rgba(14,165,233,0.25) 0, transparent 55%),
+        linear-gradient(to bottom, var(--bg-gradient-top), var(--bg-gradient-bottom));
       color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
@@ -108,41 +110,59 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+    }
+
+    .brand-icon-wrapper {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      padding: 2px;
+      background: radial-gradient(circle at 30% 0%, #60a5fa, #1d4ed8);
+      box-shadow:
+        0 0 0 2px rgba(15,23,42,0.85),
+        0 14px 32px rgba(15,23,42,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      box-shadow:
-        0 0 0 2px rgba(191, 219, 254, 0.9),
-        0 12px 28px rgba(37, 99, 235, 0.4);
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
     }
 
     .brand-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       letter-spacing: -0.03em;
-      color: #0f172a;
+      color: #e5e7eb;
     }
 
     .brand-subtitle {
       font-size: 12px;
-      color: var(--muted);
+      color: #cbd5f5;
     }
 
     .trust-pill {
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.85);
-      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
       font-size: 12px;
-      color: var(--text-soft);
+      color: #e5e7eb;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      box-shadow: 0 10px 30px rgba(148,163,184,0.35);
+      box-shadow: 0 10px 30px rgba(15,23,42,0.9);
     }
 
     .trust-pill-dot {
@@ -150,7 +170,7 @@
       height: 8px;
       border-radius: 999px;
       background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34,197,94,0.3);
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
     }
 
     /* MAIN SHELL */
@@ -166,15 +186,15 @@
       width: 100%;
       max-width: 1080px;
       background:
-        radial-gradient(circle at 0% 0%, rgba(191,219,254,0.7) 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(59,130,246,0.3) 0, transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(96,165,250,0.25) 0, transparent 55%),
-        var(--card);
+        radial-gradient(circle at 0% 0%, rgba(191,219,254,0.8) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(59,130,246,0.45) 0, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(96,165,250,0.35) 0, transparent 55%),
+        rgba(15,23,42,0.98);
       border-radius: 28px;
       padding: 20px;
       box-shadow:
-        0 32px 80px rgba(15,23,42,0.35),
-        0 0 0 1px rgba(148,163,184,0.35);
+        0 40px 90px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(15,23,42,0.9);
       position: relative;
       overflow: hidden;
     }
@@ -184,7 +204,7 @@
       position: absolute;
       inset: 16px;
       border-radius: 22px;
-      border: 1px solid rgba(148,163,184,0.35);
+      border: 1px solid rgba(148,163,184,0.5);
       pointer-events: none;
       backdrop-filter: blur(4px);
     }
@@ -196,9 +216,9 @@
       margin: 0 auto;
       padding: 18px 18px 12px;
       border-radius: 20px;
-      background: rgba(255,255,255,0.96);
+      background: rgba(255,255,255,0.98);
       box-shadow:
-        0 18px 50px rgba(15,23,42,0.15),
+        0 18px 50px rgba(15,23,42,0.55),
         0 0 0 1px rgba(226,232,240,0.9);
     }
 
@@ -226,7 +246,7 @@
 
     h1 {
       margin: 0;
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: -0.03em;
       color: var(--text);
     }
@@ -274,9 +294,9 @@
       color: var(--muted);
       padding: 10px 12px;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(191,219,254,0.9));
-      border: 1px solid rgba(148,163,184,0.55);
-      box-shadow: 0 14px 35px rgba(59,130,246,0.25);
+      background: linear-gradient(135deg, rgba(219,234,254,0.98), rgba(191,219,254,0.95));
+      border: 1px solid rgba(148,163,184,0.6);
+      box-shadow: 0 16px 40px rgba(59,130,246,0.35);
     }
 
     .hero-side strong {
@@ -612,8 +632,8 @@
       font-size: 14px;
       cursor: pointer;
       box-shadow:
-        0 12px 32px rgba(37,99,235,0.55),
-        0 0 0 1px rgba(191,219,254,0.4);
+        0 12px 32px rgba(37,99,235,0.7),
+        0 0 0 1px rgba(191,219,254,0.5);
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -635,7 +655,7 @@
 
     .btn-primary:active {
       transform: translateY(1px);
-      box-shadow: 0 6px 16px rgba(37,99,235,0.5);
+      box-shadow: 0 6px 16px rgba(37,99,235,0.6);
     }
 
     .btn-primary.sending {
@@ -819,11 +839,13 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="brand">
-          <!-- update the src to match your icon filename in the repo -->
-          <img src="utah-rate-check-icon.png" alt="Utah Rate Check" class="brand-icon">
-          <div>
+          <!-- When you upload your logo, name it utah-rate-check-icon.png -->
+          <div class="brand-icon-wrapper">
+            <img src="utah-rate-check-icon.png" alt="Utah Rate Check" class="brand-icon">
+          </div>
+          <div class="brand-text">
             <div class="brand-title">Utah Rate Check</div>
-            <div class="brand-subtitle">Quick auto &amp; home insurance quotes with Reece.</div>
+            <div class="brand-subtitle">Get a quick auto &amp; home insurance quote.</div>
           </div>
         </div>
         <div class="trust-pill">
@@ -842,11 +864,11 @@
               <div class="hero-eyebrow">QUOTE REQUEST</div>
               <h1>Check your Utah auto &amp; home rate in about 30 seconds.</h1>
               <p class="subtitle">
-                Answer a few quick questions below. Reece will personally review your info and send back a custom quote — no spam, no pressure.
+                Answer a few quick questions below. Reece will personally review your information and send back a custom quote — no call center, no spam.
               </p>
               <ul class="hero-points">
-                <li><span class="hero-check">✓</span> No call center — you work with one local agent</li>
-                <li><span class="hero-check">✓</span> We compare coverage &amp; price, not just price</li>
+                <li><span class="hero-check">✓</span> One local agent helping you start to finish</li>
+                <li><span class="hero-check">✓</span> Compare coverage &amp; price, not just price</li>
                 <li><span class="hero-check">✓</span> Bundle auto + home or renters for extra savings</li>
               </ul>
             </div>
@@ -1318,9 +1340,6 @@
         if (!res.ok) {
           throw new Error("Request failed with status " + res.status);
         }
-
-        // If the worker returns JSON, you could read it here:
-        // const data = await res.json();
 
         form.style.display = "none";
         successPanel.classList.add("active");
