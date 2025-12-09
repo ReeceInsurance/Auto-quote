@@ -75,9 +75,9 @@
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
 
-      /* Base44-ish dark radial gradient background */
+      /* More BLUE, still glowy */
       background:
-        radial-gradient(circle at top, #0b1120 0, #020617 55%, #000000 100%);
+        radial-gradient(circle at top, #1d4ed8 0, #020617 60%, #020617 100%);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
     }
@@ -88,10 +88,10 @@
       flex-direction: column;
     }
 
-    /* TOP LOGO – small, floating, no box */
+    /* TOP LOGO – smaller, cropped feel, no big space */
 
     .site-header {
-      padding: 14px 12px 4px;
+      padding: 6px 10px 0;
       text-align: center;
     }
 
@@ -101,13 +101,13 @@
     }
 
     .top-logo {
-      width: 170px;
-      max-width: 70%;
+      width: 130px;
+      max-width: 60%;
       height: auto;
       display: inline-block;
       filter:
-        drop-shadow(0px 4px 12px rgba(59, 130, 246, 0.7))
-        drop-shadow(0px 18px 40px rgba(15, 23, 42, 0.95));
+        drop-shadow(0px 3px 9px rgba(59, 130, 246, 0.7))
+        drop-shadow(0px 14px 32px rgba(15, 23, 42, 0.95));
     }
 
     /* MAIN SHELL */
@@ -123,9 +123,9 @@
       width: 100%;
       max-width: 1080px;
       background:
-        radial-gradient(circle at 10% 0%, rgba(56,189,248,0.18) 0, transparent 55%),
-        radial-gradient(circle at 90% 0%, rgba(59,130,246,0.35) 0, transparent 60%),
-        radial-gradient(circle at 0% 100%, rgba(79,70,229,0.35) 0, transparent 60%),
+        radial-gradient(circle at 10% 0%, rgba(56,189,248,0.22) 0, transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(59,130,246,0.45) 0, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(37,99,235,0.35) 0, transparent 60%),
         #020617;
       border-radius: 28px;
       padding: 18px;
@@ -577,6 +577,107 @@
       margin-bottom: 6px;
     }
 
+    /* VEHICLES UI */
+
+    .vehicles-shell {
+      border-radius: 14px;
+      border: 1px solid rgba(55,65,81,0.95);
+      background:
+        radial-gradient(circle at top left, rgba(37,99,235,0.35) 0, transparent 60%),
+        radial-gradient(circle at bottom right, rgba(15,118,110,0.3) 0, transparent 65%),
+        rgba(15,23,42,0.98);
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vehicle-card {
+      border-radius: 12px;
+      border: 1px solid rgba(148,163,184,0.8);
+      background: rgba(15,23,42,1);
+      padding: 8px 10px;
+      box-shadow:
+        0 10px 26px rgba(15,23,42,0.9),
+        0 0 0 1px rgba(30,64,175,0.65);
+    }
+
+    .vehicle-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .vehicle-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .vehicle-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.5);
+    }
+
+    .vehicle-label {
+      font-weight: 600;
+    }
+
+    .chip-remove {
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid rgba(248,113,113,0.9);
+      background: rgba(127,29,29,0.6);
+      color: #fecaca;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .vehicle-fields .row {
+      margin-top: 4px;
+    }
+
+    .vehicle-fields input {
+      font-size: 13px;
+    }
+
+    .btn-soft {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.8);
+      background: rgba(15,23,42,0.98);
+      color: #e5e7eb;
+      padding: 7px 12px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      margin-top: 4px;
+      align-self: flex-start;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.9);
+    }
+
+    .btn-soft span.icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .btn-soft:hover {
+      background: rgba(30,64,175,0.95);
+    }
+
     /* CONTROLS & STATUS – STICKY at bottom */
 
     .controls-bar {
@@ -821,7 +922,7 @@
       }
 
       .site-header {
-        padding: 12px 10px 0;
+        padding: 8px 8px 0;
       }
 
       .shell {
@@ -1005,9 +1106,41 @@
                     <div class="section-tag">Tell us about the car(s) you want quoted.</div>
                   </div>
                   <div class="section-body">
+                    <!-- Vehicles UI -->
                     <div class="field-group">
-                      <label for="vehiclesSummary">What vehicles should we quote?</label>
-                      <textarea id="vehiclesSummary" name="vehiclesSummary" placeholder="Example: 2020 Honda Civic EX, 2018 Toyota Highlander Limited. Include who drives what if there are multiple drivers."></textarea>
+                      <label>What vehicles should we quote?</label>
+                      <div class="vehicles-shell" id="vehiclesShell">
+                        <div class="vehicle-card">
+                          <div class="vehicle-header">
+                            <div class="vehicle-tag">
+                              <span class="vehicle-dot"></span>
+                              <span class="vehicle-label">Vehicle 1</span>
+                            </div>
+                            <button type="button" class="chip-remove" data-remove hidden>Remove</button>
+                          </div>
+                          <div class="vehicle-fields">
+                            <div class="row">
+                              <div class="col field-group">
+                                <label>Year</label>
+                                <input class="vehicle-year" inputmode="numeric" placeholder="2020">
+                              </div>
+                              <div class="col field-group">
+                                <label>Make</label>
+                                <input class="vehicle-make" placeholder="Honda">
+                              </div>
+                              <div class="col field-group">
+                                <label>Model</label>
+                                <input class="vehicle-model" placeholder="Civic EX">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button type="button" class="btn-soft" id="addVehicleBtn">
+                          <span class="icon">+</span>
+                          Add another vehicle
+                        </button>
+                      </div>
+                      <p class="field-note">You can add as many vehicles as you need — just leave extra ones blank if not used.</p>
                     </div>
 
                     <div class="row">
@@ -1163,6 +1296,51 @@
     const needHomeCheckbox = document.getElementById("needHome");
     const homeSection = document.getElementById("homeSection");
 
+    // Vehicles
+    const vehiclesShell = document.getElementById("vehiclesShell");
+    const addVehicleBtn = document.getElementById("addVehicleBtn");
+
+    function renumberVehicles() {
+      const cards = vehiclesShell.querySelectorAll(".vehicle-card");
+      cards.forEach((card, idx) => {
+        const label = card.querySelector(".vehicle-label");
+        if (label) label.textContent = `Vehicle ${idx + 1}`;
+        const removeBtn = card.querySelector("[data-remove]");
+        if (removeBtn) {
+          removeBtn.hidden = cards.length === 1;
+        }
+      });
+    }
+
+    function setupVehicleUI() {
+      if (!vehiclesShell) return;
+      renumberVehicles();
+
+      if (addVehicleBtn) {
+        addVehicleBtn.addEventListener("click", () => {
+          const firstCard = vehiclesShell.querySelector(".vehicle-card");
+          if (!firstCard) return;
+          const clone = firstCard.cloneNode(true);
+          clone.querySelectorAll("input").forEach(i => i.value = "");
+          const removeBtn = clone.querySelector("[data-remove]");
+          if (removeBtn) removeBtn.hidden = false;
+          vehiclesShell.insertBefore(clone, addVehicleBtn);
+          renumberVehicles();
+        });
+      }
+
+      vehiclesShell.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-remove]");
+        if (!btn) return;
+        const card = btn.closest(".vehicle-card");
+        if (!card) return;
+        const cards = vehiclesShell.querySelectorAll(".vehicle-card");
+        if (cards.length <= 1) return;
+        card.remove();
+        renumberVehicles();
+      });
+    }
+
     function updateStepUI() {
       stepPanels.forEach(panel => {
         const s = Number(panel.dataset.step);
@@ -1283,6 +1461,29 @@
       return valid;
     }
 
+    function collectVehicles() {
+      const cards = vehiclesShell ? vehiclesShell.querySelectorAll(".vehicle-card") : [];
+      const vehicles = [];
+      cards.forEach((card, idx) => {
+        const year = card.querySelector(".vehicle-year")?.value.trim() || "";
+        const make = card.querySelector(".vehicle-make")?.value.trim() || "";
+        const model = card.querySelector(".vehicle-model")?.value.trim() || "";
+        if (year || make || model) {
+          vehicles.push({ year, make, model });
+        }
+      });
+      let summary = "";
+      if (vehicles.length) {
+        summary = vehicles
+          .map((v, i) => {
+            const parts = [v.year, v.make, v.model].filter(Boolean).join(" ");
+            return `Vehicle ${i + 1}: ${parts}`;
+          })
+          .join("\n");
+      }
+      return { vehicles, vehiclesSummary: summary };
+    }
+
     async function submitForm() {
       nextBtn.disabled = true;
       backBtn.disabled = true;
@@ -1300,6 +1501,8 @@
       const homeSquareFeet = formData.get("homeSquareFeet") || "";
       const homeRoofYear = formData.get("homeRoofYear") || "";
       const homeNotes = formData.get("homeNotes") || "";
+
+      const { vehicles, vehiclesSummary } = collectVehicles();
 
       let homeSummary = "";
       if (needHome) {
@@ -1327,7 +1530,8 @@
         needHome,
 
         // auto section
-        vehiclesSummary: formData.get("vehiclesSummary") || "",
+        vehiclesSummary,
+        vehicles,
         currentInsurer: formData.get("currentInsurer") || "",
         monthsInsured: formData.get("monthsInsured") || "",
         accidentsClaims: formData.get("accidentsClaims") || "",
@@ -1375,6 +1579,7 @@
     }
 
     // Initialize
+    setupVehicleUI();
     updateStepUI();
   </script>
 </body>
