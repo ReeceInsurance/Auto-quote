@@ -62,7 +62,7 @@
       --border: #cbd5f5;
       --muted: #9ca3af;
       --text: #0f172a;
-      --text-soft: #e5e7eb;
+      --text-soft: #4b5563;
       --error: #b91c1c;
       --success: #16a34a;
     }
@@ -74,7 +74,6 @@
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-
       /* More BLUE, still glowy */
       background:
         radial-gradient(circle at top, #1d4ed8 0, #020617 60%, #020617 100%);
@@ -88,10 +87,10 @@
       flex-direction: column;
     }
 
-    /* TOP LOGO – smaller, cropped feel, no big space */
+    /* TOP LOGO – larger, but tighter spacing */
 
     .site-header {
-      padding: 6px 10px 0;
+      padding: 4px 10px 0;
       text-align: center;
     }
 
@@ -101,8 +100,8 @@
     }
 
     .top-logo {
-      width: 130px;
-      max-width: 60%;
+      width: 180px;
+      max-width: 70%;
       height: auto;
       display: inline-block;
       filter:
@@ -116,7 +115,7 @@
       flex: 1;
       display: flex;
       justify-content: center;
-      padding: 8px 10px 24px;
+      padding: 4px 10px 24px;
     }
 
     .frame {
@@ -346,7 +345,9 @@
       background: #22c55e;
       border-color: #16a34a;
       color: #ecfdf5;
-      box-shadow: 0 0 0 1px rgba(22,163,74,0.9);
+      box-shadow:
+        0 0 0 1px rgba(22,163,74,0.9),
+        0 0 14px rgba(22,163,74,0.9);
     }
 
     .step-body {
@@ -366,10 +367,10 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      max-height: 560px; /* keeps it mostly on screen */
+      max-height: 560px;
     }
 
-    /* FORM SECTIONS */
+    /* FORM SECTIONS – LIGHT INNER PAGE */
 
     form {
       margin-top: 4px;
@@ -382,16 +383,19 @@
     .step-panel {
       display: none;
       border-radius: 18px;
-      border: 1px solid rgba(31,41,55,0.9);
-      background: radial-gradient(circle at 0% 0%, rgba(37,99,235,0.2) 0, transparent 55%), rgba(15,23,42,0.98);
+      border: 1px solid #d1d5db;
+      background:
+        radial-gradient(circle at top left, rgba(191,219,254,0.75) 0, transparent 60%),
+        #f9fafb;
       padding: 14px 12px 12px;
       box-shadow:
-        0 14px 34px rgba(15,23,42,0.85),
-        0 0 0 1px rgba(31,41,55,0.95);
+        0 10px 30px rgba(15,23,42,0.35),
+        0 0 0 1px rgba(229,231,235,0.9);
       animation: fadeIn 0.2s ease;
       flex: 1;
       min-height: 0;
       overflow-y: auto;
+      color: var(--text);
     }
 
     .step-panel.active {
@@ -416,7 +420,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      color: #f9fafb;
+      color: #0f172a;
     }
 
     .section-title-badge {
@@ -429,13 +433,13 @@
       align-items: center;
       justify-content: center;
       font-size: 11px;
-      color: #bfdbfe;
-      box-shadow: 0 0 0 3px rgba(30,64,175,0.9);
+      color: #1d4ed8;
+      box-shadow: 0 0 0 3px rgba(191,219,254,0.9);
     }
 
     .section-tag {
       font-size: 11px;
-      color: #9ca3af;
+      color: #6b7280;
     }
 
     .section-body {
@@ -453,7 +457,7 @@
     label {
       font-size: 13px;
       font-weight: 550;
-      color: #e5e7eb;
+      color: #111827;
     }
 
     .row {
@@ -468,10 +472,10 @@
 
     input, select, textarea {
       width: 100%;
-      border-radius: 12px;
-      border: 1px solid rgba(31,41,55,0.9);
-      background: rgba(15,23,42,0.98);
-      color: #f9fafb;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #111827;
       padding: 9px 11px;
       font-size: 14px;
       outline: none;
@@ -480,17 +484,17 @@
 
     input::placeholder,
     textarea::placeholder {
-      color: #6b7280;
+      color: #9ca3af;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
       border-color: #3b82f6;
-      background: #020617;
+      background: #ffffff;
       box-shadow:
         0 0 0 1px rgba(59,130,246,0.9),
-        0 0 0 8px rgba(30,64,175,0.9);
+        0 0 0 6px rgba(191,219,254,0.9);
       transform: translateY(-0.5px);
     }
 
@@ -529,12 +533,12 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(15,23,42,0.95);
+      background: #eef2ff;
       border-radius: 999px;
       padding: 6px 10px;
-      border: 1px solid rgba(31,41,55,0.95);
+      border: 1px solid #c7d2fe;
       cursor: pointer;
-      color: #e5e7eb;
+      color: #111827;
     }
 
     .inline-options input {
@@ -547,11 +551,11 @@
       align-items: flex-start;
       gap: 9px;
       padding: 9px 11px;
-      border-radius: 12px;
-      border: 1px solid rgba(31,41,55,0.9);
-      background: rgba(15,23,42,0.98);
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
       font-size: 11px;
-      color: #9ca3af;
+      color: #4b5563;
     }
 
     .pill-consent input {
@@ -561,31 +565,30 @@
     }
 
     .pill-consent strong {
-      color: #f9fafb;
+      color: #111827;
     }
 
     .home-extra {
       margin-top: 8px;
       padding-top: 8px;
-      border-top: 1px dashed rgba(31,41,55,0.9);
+      border-top: 1px dashed #e5e7eb;
     }
 
     .home-extra-heading {
       font-size: 12px;
       font-weight: 650;
-      color: #e5e7eb;
+      color: #111827;
       margin-bottom: 6px;
     }
 
-    /* VEHICLES UI */
+    /* VEHICLES UI – year/make/model per car */
 
     .vehicles-shell {
-      border-radius: 14px;
-      border: 1px solid rgba(55,65,81,0.95);
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
       background:
-        radial-gradient(circle at top left, rgba(37,99,235,0.35) 0, transparent 60%),
-        radial-gradient(circle at bottom right, rgba(15,118,110,0.3) 0, transparent 65%),
-        rgba(15,23,42,0.98);
+        radial-gradient(circle at top left, rgba(219,234,254,0.9) 0, transparent 55%),
+        #f3f4ff;
       padding: 8px;
       display: flex;
       flex-direction: column;
@@ -593,13 +596,14 @@
     }
 
     .vehicle-card {
-      border-radius: 12px;
-      border: 1px solid rgba(148,163,184,0.8);
-      background: rgba(15,23,42,1);
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
       padding: 8px 10px;
       box-shadow:
-        0 10px 26px rgba(15,23,42,0.9),
-        0 0 0 1px rgba(30,64,175,0.65);
+        0 8px 18px rgba(15,23,42,0.12),
+        0 0 0 1px rgba(226,232,240,0.8);
+      color: #111827;
     }
 
     .vehicle-header {
@@ -608,7 +612,7 @@
       align-items: center;
       margin-bottom: 6px;
       font-size: 13px;
-      color: #e5e7eb;
+      color: #111827;
     }
 
     .vehicle-tag {
@@ -622,7 +626,7 @@
       height: 7px;
       border-radius: 999px;
       background: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59,130,246,0.5);
+      box-shadow: 0 0 0 4px rgba(191,219,254,1);
     }
 
     .vehicle-label {
@@ -633,8 +637,8 @@
       border-radius: 999px;
       padding: 4px 10px;
       border: 1px solid rgba(248,113,113,0.9);
-      background: rgba(127,29,29,0.6);
-      color: #fecaca;
+      background: #fef2f2;
+      color: #b91c1c;
       font-size: 11px;
       cursor: pointer;
     }
@@ -649,9 +653,9 @@
 
     .btn-soft {
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.8);
-      background: rgba(15,23,42,0.98);
-      color: #e5e7eb;
+      border: 1px solid #c7d2fe;
+      background: #eef2ff;
+      color: #1f2937;
       padding: 7px 12px;
       font-size: 13px;
       display: inline-flex;
@@ -660,14 +664,14 @@
       cursor: pointer;
       margin-top: 4px;
       align-self: flex-start;
-      box-shadow: 0 4px 14px rgba(15,23,42,0.9);
+      box-shadow: 0 4px 10px rgba(15,23,42,0.18);
     }
 
     .btn-soft span.icon {
       width: 16px;
       height: 16px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.8);
+      border: 1px solid #c7d2fe;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -675,7 +679,7 @@
     }
 
     .btn-soft:hover {
-      background: rgba(30,64,175,0.95);
+      background: #e0e7ff;
     }
 
     /* CONTROLS & STATUS – STICKY at bottom */
@@ -690,9 +694,8 @@
       align-items: center;
       flex-wrap: wrap;
       justify-content: flex-start;
-      background: linear-gradient(to top, rgba(15,23,42,0.98), rgba(15,23,42,0.0));
-      backdrop-filter: blur(4px);
-      border-top: 1px solid rgba(31,41,55,0.9);
+      background: linear-gradient(to top, rgba(249,250,251,0.98), rgba(249,250,251,0.0));
+      border-top: 1px solid #e5e7eb;
     }
 
     .btn-primary {
@@ -771,22 +774,22 @@
     .btn-ghost {
       border-radius: 999px;
       padding: 9px 14px;
-      border: 1px solid rgba(148,163,184,0.9);
-      background: rgba(15,23,42,0.95);
-      color: #e5e7eb;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      color: #374151;
       font-size: 13px;
       cursor: pointer;
       font-weight: 500;
-      box-shadow: 0 1px 3px rgba(15,23,42,0.8);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.12);
     }
 
     .btn-ghost:hover {
-      background: rgba(30,64,175,0.95);
+      background: #f3f4f6;
     }
 
     #status {
       font-size: 11px;
-      color: #9ca3af;
+      color: #6b7280;
       min-height: 18px;
     }
 
@@ -922,11 +925,11 @@
       }
 
       .site-header {
-        padding: 8px 8px 0;
+        padding: 4px 8px 0;
       }
 
       .shell {
-        padding: 6px 8px 20px;
+        padding: 4px 8px 20px;
       }
 
       .row {
@@ -1140,7 +1143,7 @@
                           Add another vehicle
                         </button>
                       </div>
-                      <p class="field-note">You can add as many vehicles as you need — just leave extra ones blank if not used.</p>
+                      <p class="field-note">Add each car you’d like quoted. Leave extra rows blank if not needed.</p>
                     </div>
 
                     <div class="row">
@@ -1347,8 +1350,9 @@
         panel.classList.toggle("active", s === currentStep);
       });
 
+      // Make step bullets glow green up to and including the current step
       for (let i = 0; i < stepBullets.length; i++) {
-        if (i + 1 < currentStep) {
+        if (i + 1 <= currentStep) {
           stepBullets[i].classList.add("done");
         } else {
           stepBullets[i].classList.remove("done");
@@ -1562,6 +1566,10 @@
         if (!res.ok) {
           throw new Error("Request failed with status " + res.status);
         }
+
+        // Make sure step 3 bullet is green on success
+        currentStep = 3;
+        updateStepUI();
 
         form.style.display = "none";
         successPanel.classList.add("active");
