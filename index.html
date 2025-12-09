@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-   <!-- Basic page setup -->
+  <!-- Basic page setup -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -15,7 +15,7 @@
   <!-- Canonical URL -->
   <link rel="canonical" href="https://utahratecheck.com/" />
 
-  <!-- Favicons / app icons (put these image files in the repo root) -->
+  <!-- Favicons / app icons -->
   <link rel="icon" href="/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
@@ -24,7 +24,7 @@
   <!-- Browser theme color (mobile address bar) -->
   <meta name="theme-color" content="#1E5DBE" />
 
-  <!-- Open Graph / social preview -->
+  <!-- Social preview -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://utahratecheck.com/" />
   <meta
@@ -39,8 +39,6 @@
     property="og:image"
     content="https://utahratecheck.com/social-share.png"
   />
-
-  <!-- Twitter / X card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://utahratecheck.com/" />
   <meta
@@ -57,1105 +55,1290 @@
   />
 
   <style>
-    :root{
-      --bg:#020617;
-      --card:#020617;
-      --accent:#3b82f6;
-      --accent-soft:#1d4ed8;
-      --border:#1f2937;
-      --muted:#9ca3af;
-      --text:#f9fafb;
-      --text-soft:#d1d5db;
-      --error:#fca5a5;
+    :root {
+      --bg: #e5edf8;
+      --card: #ffffff;
+      --accent: #2563eb;
+      --accent-soft: #1d4ed8;
+      --accent-light: #dbeafe;
+      --border: #cbd5f5;
+      --muted: #6b7280;
+      --text: #0f172a;
+      --text-soft: #4b5563;
+      --error: #b91c1c;
+      --success: #16a34a;
     }
-    *{box-sizing:border-box;}
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
-      background:radial-gradient(circle at top,#0b1120 0,#020617 55%,#000 100%);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-    }
-    .shell{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:32px 16px;
-    }
-    .frame{
-      width:100%;
-      max-width:1024px;
-      border-radius:28px;
+
+    * { box-sizing: border-box; }
+
+    html, body { height: 100%; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 10% 0%,rgba(56,189,248,0.14) 0,transparent 55%),
-        radial-gradient(circle at 90% 0%,rgba(59,130,246,0.22) 0,transparent 55%),
-        #020617;
+        radial-gradient(circle at top left, rgba(59,130,246,0.18) 0, transparent 55%),
+        radial-gradient(circle at bottom right, rgba(59,130,246,0.18) 0, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER */
+
+    .site-header {
+      padding: 18px 18px 4px;
+    }
+
+    .header-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       box-shadow:
-        0 40px 120px rgba(15,23,42,0.9),
-        0 0 0 1px rgba(148,163,184,0.18);
-      padding:22px;
-      position:relative;
-      overflow:hidden;
-    }
-    .frame::before{
-      content:"";
-      position:absolute;
-      inset:14px;
-      border-radius:22px;
-      border:1px solid rgba(148,163,184,0.16);
-      pointer-events:none;
-    }
-    .content{
-      position:relative;
-      z-index:1;
-      border-radius:20px;
-      padding:20px 20px 18px;
-      background:rgba(15,23,42,0.95);
-      max-width:100%;
-      margin:0 auto;
+        0 0 0 2px rgba(191, 219, 254, 0.9),
+        0 12px 28px rgba(37, 99, 235, 0.4);
     }
 
-    /* Header */
-    header{
-      margin-bottom:16px;
-    }
-    .top-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-    .corner-icon{
-      font-size:28px;
-    }
-    .hero-text{
-      flex:1;
-      text-align:center;
-    }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:6px 12px;
-      border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      border:1px solid rgba(148,163,184,0.5);
-      font-size:12px;
-      color:var(--text-soft);
-      margin-bottom:6px;
-    }
-    .badge-dot{
-      width:8px;height:8px;border-radius:999px;
-      background:var(--accent);
-      box-shadow:0 0 0 4px rgba(59,130,246,0.35);
-    }
-    h1{
-      margin:0;
-      font-size:24px;
-      letter-spacing:-0.03em;
-    }
-    .subtitle{
-      margin:6px 0 6px;
-      font-size:15px;
-      color:var(--text-soft);
-      max-width:520px;
-      margin-left:auto;
-      margin-right:auto;
-    }
-    .hero-points{
-      list-style:none;
-      padding:0;
-      margin:6px 0 0;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px 16px;
-      font-size:12px;
-      color:var(--text-soft);
-      justify-content:center;
-    }
-    .hero-points li{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .hero-bullet{
-      width:14px;
-      height:14px;
-      border-radius:999px;
-      border:1px solid rgba(52,211,153,0.8);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:10px;
-      color:#bbf7d0;
-      background:rgba(22,163,74,0.3);
+    .brand-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #0f172a;
     }
 
-    /* Progress bar */
-    .progress-shell{
-      margin-bottom:14px;
-    }
-    .progress-label{
-      display:flex;
-      justify-content:space-between;
-      font-size:11px;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-    .progress-label strong{color:var(--text-soft);}
-    .progress-track{
-      width:100%;
-      height:6px;
-      border-radius:999px;
-      background:rgba(15,23,42,0.9);
-      overflow:hidden;
-    }
-    .progress-bar{
-      height:100%;
-      width:0%;
-      border-radius:999px;
-      background:linear-gradient(90deg,#3b82f6,#22c55e);
-      transition:width 0.25s ease;
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--muted);
     }
 
-    .layout{
-      display:flex;
-      gap:24px;
-      align-items:flex-start;
-    }
-    .sidebar{
-      flex:0 0 260px;
-      font-size:14px;
-      color:var(--text-soft);
-      border-right:1px solid rgba(31,41,55,0.8);
-      padding-right:18px;
-    }
-    .sidebar h2{
-      font-size:16px;
-      margin:0 0 8px;
-      color:var(--text);
-    }
-    .steps{
-      list-style:none;
-      padding:0;
-      margin:12px 0 0;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .steps li{
-      display:flex;
-      gap:8px;
-      align-items:flex-start;
-    }
-    .step-index{
-      width:22px;height:22px;border-radius:999px;
-      border:2px solid var(--accent);
-      display:flex;align-items:center;justify-content:center;
-      font-size:12px;
-      color:var(--accent-soft);
-      background:rgba(15,23,42,0.9);
-      flex-shrink:0;
-    }
-    .step-body{
-      font-size:13px;
-      color:var(--text-soft);
-    }
-    .step-title{font-weight:600;color:var(--text);}
-    .main-form{
-      flex:1;
-      min-width:0;
+    .trust-pill {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 12px;
+      color: var(--text-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 30px rgba(148,163,184,0.35);
     }
 
-    /* Sections & fields */
-    form{margin-top:4px;display:flex;flex-direction:column;gap:16px;}
-    .section{
-      border-radius:16px;
-      border:1px solid rgba(31,41,55,0.9);
-      background:rgba(15,23,42,0.98);
-      padding:12px 12px 10px;
+    .trust-pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.3);
     }
-    .section-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:8px;
-    }
-    .section-title{
-      font-size:15px;
-      font-weight:600;
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-    .section-tag{
-      font-size:11px;
-      color:var(--muted);
-    }
-    .section-title-badge{
-      width:18px;height:18px;border-radius:999px;
-      background:rgba(37,99,235,0.18);
-      border:1px solid rgba(59,130,246,0.8);
-      display:flex;align-items:center;justify-content:center;
-      font-size:11px;
-      color:var(--accent-soft);
-    }
-    .section-body{display:flex;flex-direction:column;gap:10px;}
 
-    .field-group{display:flex;flex-direction:column;gap:5px;}
-    label{
-      font-size:13px;
-      font-weight:500;
-      color:var(--text-soft);
-    }
-    .row{display:flex;gap:10px;}
-    .col{flex:1;}
-    input,select,textarea{
-      width:100%;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(15,23,42,0.98);
-      color:var(--text);
-      padding:10px 12px;
-      font-size:14px;
-      outline:none;
-      transition:border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.08s ease;
-    }
-    input::placeholder,textarea::placeholder{color:#9ca3af;}
-    input:focus,select:focus,textarea:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 1px rgba(59,130,246,0.9);
-      background:#020617;
-      transform:translateY(-0.5px);
-    }
-    textarea{min-height:80px;resize:vertical;}
-    select{
-      appearance:none;
-      background-image:linear-gradient(45deg,transparent 50%,#9ca3af 50%),linear-gradient(135deg,#9ca3af 50%,transparent 50%);
-      background-position:calc(100% - 16px) calc(50% - 4px),calc(100% - 10px) calc(50% - 4px);
-      background-size:5px 5px,5px 5px;
-      background-repeat:no-repeat;
-      padding-right:28px;
-    }
-    .field-note{font-size:12px;color:var(--muted);}
-    .inline-radio{display:flex;flex-wrap:wrap;gap:10px;font-size:13px;}
-    .inline-radio label{display:inline-flex;align-items:center;gap:6px;color:var(--text-soft);cursor:pointer;}
-    .inline-radio input{width:auto;transform:scale(1);}
-    .checkbox-row{display:flex;flex-wrap:wrap;gap:8px;}
-    .checkbox-row label{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(15,23,42,0.97);
-      font-size:12px;
-      cursor:pointer;
-    }
-    .checkbox-row input{width:auto;transform:scale(1);}
-    .pill-consent{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid var(--border);
-      background:rgba(15,23,42,0.98);
-      font-size:12px;
-      color:var(--muted);
-    }
-    .pill-consent input{margin-top:2px;width:auto;transform:scale(1.05);}
-    .pill-consent strong{color:var(--text);}
+    /* MAIN SHELL */
 
-    /* Vehicle cards */
-    .vehicles-shell{
-      border-radius:14px;
-      border:1px solid rgba(31,41,55,0.9);
+    .shell {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 10px 12px 28px;
+    }
+
+    .frame {
+      width: 100%;
+      max-width: 1080px;
       background:
-        radial-gradient(circle at top left,rgba(37,99,235,0.25) 0,transparent 55%),
-        radial-gradient(circle at bottom right,rgba(15,118,110,0.18) 0,transparent 60%),
-        rgba(15,23,42,0.98);
-      padding:8px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-    }
-    .vehicle-card{
-      border-radius:12px;
-      border:1px solid rgba(148,163,184,0.5);
-      background:rgba(15,23,42,1);
-      padding:8px 10px;
-    }
-    .vehicle-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:6px;
-      font-size:13px;
-      color:var(--text-soft);
-    }
-    .vehicle-tag{display:inline-flex;align-items:center;gap:6px;}
-    .vehicle-dot{width:7px;height:7px;border-radius:999px;background:var(--accent);}
-    .chip-remove{
-      border-radius:999px;
-      padding:4px 10px;
-      border:1px solid rgba(248,113,113,0.9);
-      background:rgba(127,29,29,0.4);
-      color:#fecaca;
-      font-size:11px;
-      cursor:pointer;
-    }
-    .vehicle-fields .row{margin-top:4px;}
-    .vehicle-fields input{font-size:13px;}
-    .btn-soft{
-      border-radius:999px;
-      border:1px solid rgba(148,163,184,0.6);
-      background:rgba(15,23,42,0.98);
-      color:var(--text);
-      padding:7px 12px;
-      font-size:13px;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      cursor:pointer;
-      margin-top:4px;
-    }
-    .btn-soft span.icon{
-      width:16px;height:16px;border-radius:999px;border:1px solid rgba(148,163,184,0.8);
-      display:flex;align-items:center;justify-content:center;font-size:12px;
+        radial-gradient(circle at 0% 0%, rgba(191,219,254,0.7) 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, rgba(59,130,246,0.3) 0, transparent 60%),
+        radial-gradient(circle at 0% 100%, rgba(96,165,250,0.25) 0, transparent 55%),
+        var(--card);
+      border-radius: 28px;
+      padding: 20px;
+      box-shadow:
+        0 32px 80px rgba(15,23,42,0.35),
+        0 0 0 1px rgba(148,163,184,0.35);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Buttons & status */
-    .controls-bar{
-      display:flex;
-      gap:10px;
-      margin-top:8px;
-      align-items:center;
-      flex-wrap:wrap;
-      justify-content:flex-start;
-    }
-    .btn-primary{
-      border-radius:999px;
-      border:none;
-      padding:11px 18px;
-      background:linear-gradient(135deg,var(--accent) 0,var(--accent-soft) 100%);
-      color:white;
-      font-weight:600;
-      font-size:14px;
-      cursor:pointer;
-      box-shadow:0 16px 32px rgba(37,99,235,0.55);
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      position:relative;
-      overflow:hidden;
-      transition:transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
-    }
-    .btn-primary span.icon{
-      width:18px;height:18px;border-radius:999px;
-      background:rgba(15,23,42,0.95);
-      display:flex;align-items:center;justify-content:center;font-size:12px;
-    }
-    .btn-primary:active{
-      transform:translateY(1px);
-      box-shadow:0 8px 16px rgba(37,99,235,0.6);
-    }
-    .btn-primary.sending{
-      opacity:0.85;
-      cursor:default;
-      box-shadow:0 8px 18px rgba(37,99,235,0.4);
-      animation:pulse 1.2s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      0%{transform:translateY(0) scale(1);}
-      50%{transform:translateY(0) scale(1.02);}
-      100%{transform:translateY(0) scale(1);}
+    .frame::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(148,163,184,0.35);
+      pointer-events: none;
+      backdrop-filter: blur(4px);
     }
 
-    .btn-ghost{
-      border-radius:999px;
-      padding:9px 14px;
-      border:1px solid rgba(148,163,184,0.6);
-      background:transparent;
-      color:var(--text-soft);
-      font-size:13px;
-      cursor:pointer;
-    }
-    #status{
-      font-size:12px;
-      color:var(--muted);
-      min-height:18px;
-    }
-    #status.error{color:var(--error);}
-    #status.success{color:#bbf7d0;}
-
-    .input-error{
-      border-color:var(--error) !important;
-      box-shadow:0 0 0 1px rgba(248,113,113,0.7) !important;
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 18px 12px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.96);
+      box-shadow:
+        0 18px 50px rgba(15,23,42,0.15),
+        0 0 0 1px rgba(226,232,240,0.9);
     }
 
-    /* Success screen */
-    #successPanel{
-      display:none;
-      padding:32px 18px 22px;
-      text-align:center;
-    }
-    .success-icon{
-      width:56px;height:56px;border-radius:999px;
-      margin:0 auto 14px;
-      border:2px solid #22c55e;
-      display:flex;align-items:center;justify-content:center;
-      color:#bbf7d0;
-      font-size:28px;
-      background:rgba(22,163,74,0.18);
-      box-shadow:0 0 0 6px rgba(34,197,94,0.25);
-    }
-    #successPanel h2{
-      font-size:22px;
-      margin:0 0 8px;
-    }
-    #successPanel p{
-      margin:4px 0;
-      font-size:14px;
-      color:var(--text-soft);
+    /* HERO / INTRO */
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 18px;
+      align-items: flex-start;
     }
 
-    .privacy-note{
-      margin-top:12px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(31,41,55,0.9);
-      background:rgba(15,23,42,0.98);
-      font-size:12px;
-      color:var(--text-soft);
-    }
-    .privacy-note strong{
-      display:block;
-      margin-bottom:4px;
-      color:var(--text);
+    .hero-main {
+      flex: 1 1 260px;
     }
 
-    footer{
-      margin-top:12px;
-      font-size:12px;
-      text-align:left;
-      color:var(--muted);
+    .hero-eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 4px;
     }
-    footer strong{color:var(--text);}
 
-    @media (max-width:880px){
-      .layout{flex-direction:column;gap:16px;}
-      .sidebar{
-        border-right:none;
-        border-bottom:1px solid rgba(31,41,55,0.8);
-        padding-right:0;
-        padding-bottom:12px;
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+      color: var(--text);
+    }
+
+    .subtitle {
+      margin: 6px 0 10px;
+      font-size: 14px;
+      color: var(--text-soft);
+      max-width: 520px;
+    }
+
+    .hero-points {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-points li {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.1);
+      border: 1px solid rgba(34,197,94,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #15803d;
+    }
+
+    .hero-side {
+      flex: 0 0 230px;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(219,234,254,0.95), rgba(191,219,254,0.9));
+      border: 1px solid rgba(148,163,184,0.55);
+      box-shadow: 0 14px 35px rgba(59,130,246,0.25);
+    }
+
+    .hero-side strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    /* PROGRESS */
+
+    .progress-shell {
+      margin-bottom: 14px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .progress-label strong {
+      color: var(--text-soft);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #3b82f6, #22c55e);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.4);
+      transition: width 0.25s ease;
+    }
+
+    /* LAYOUT */
+
+    .layout {
+      display: flex;
+      gap: 22px;
+      align-items: flex-start;
+    }
+
+    .sidebar {
+      flex: 0 0 240px;
+      font-size: 13px;
+      color: var(--text-soft);
+      border-right: 1px solid #e5e7eb;
+      padding-right: 18px;
+    }
+
+    .sidebar h2 {
+      font-size: 15px;
+      margin: 0 0 8px;
+      color: var(--text);
+    }
+
+    .steps {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .step-index {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: var(--accent-soft);
+      background: #eff6ff;
+      flex-shrink: 0;
+    }
+
+    .step-index.done {
+      background: #22c55e;
+      border-color: #15803d;
+      color: #ecfdf5;
+    }
+
+    .step-body {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .step-title {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .main-form {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* FORM SECTIONS */
+
+    form { margin-top: 4px; }
+
+    .step-panel {
+      display: none;
+      border-radius: 16px;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      padding: 14px 12px 12px;
+      box-shadow: 0 12px 30px rgba(15,23,42,0.06);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+    }
+
+    .section-title-badge {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #dbeafe;
+      border: 1px solid #60a5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: var(--accent-soft);
+    }
+
+    .section-tag {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .section-body {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-soft);
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 0;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: var(--text);
+      padding: 9px 11px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease, transform 0.08s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9ca3af;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent);
+      background: #ffffff;
+      box-shadow:
+        0 0 0 1px rgba(59,130,246,0.7),
+        0 0 0 8px rgba(191,219,254,0.8);
+      transform: translateY(-0.5px);
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    select {
+      appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #9ca3af 50%),
+        linear-gradient(135deg, #9ca3af 50%, transparent 50%);
+      background-position:
+        calc(100% - 16px) calc(50% - 5px),
+        calc(100% - 11px) calc(50% - 5px);
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      padding-right: 28px;
+    }
+
+    .field-note {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .inline-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .inline-options label {
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f9fafb;
+      border-radius: 999px;
+      padding: 6px 10px;
+      border: 1px solid #e5e7eb;
+      cursor: pointer;
+      color: var(--text-soft);
+    }
+
+    .inline-options input {
+      width: auto;
+      transform: scale(1);
+    }
+
+    .pill-consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .pill-consent input {
+      margin-top: 2px;
+      width: auto;
+      transform: scale(1.05);
+    }
+
+    .pill-consent strong {
+      color: var(--text);
+    }
+
+    .home-extra {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #e5e7eb;
+    }
+
+    .home-extra-heading {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-soft);
+      margin-bottom: 6px;
+    }
+
+    /* CONTROLS & STATUS */
+
+    .controls-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 18px;
+      background: linear-gradient(135deg, var(--accent) 0, var(--accent-soft) 100%);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow:
+        0 12px 32px rgba(37,99,235,0.55),
+        0 0 0 1px rgba(191,219,254,0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+    }
+
+    .btn-primary span.icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .btn-primary:active {
+      transform: translateY(1px);
+      box-shadow: 0 6px 16px rgba(37,99,235,0.5);
+    }
+
+    .btn-primary.sending {
+      opacity: 0.85;
+      cursor: default;
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(0) scale(1.02); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 14px;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      color: var(--text-soft);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    #status {
+      font-size: 11px;
+      color: var(--muted);
+      min-height: 18px;
+    }
+
+    #status.error {
+      color: var(--error);
+    }
+
+    #status.success {
+      color: var(--success);
+    }
+
+    .input-error {
+      border-color: var(--error) !important;
+      box-shadow:
+        0 0 0 1px rgba(239,68,68,0.75),
+        0 0 0 6px rgba(254,202,202,0.9) !important;
+    }
+
+    /* SUCCESS PANEL */
+
+    #successPanel {
+      display: none;
+      padding: 32px 18px 22px;
+      text-align: center;
+    }
+
+    #successPanel.active {
+      display: block;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 999px;
+      margin: 0 auto 14px;
+      border: 2px solid #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #22c55e;
+      font-size: 30px;
+      background: #ecfdf5;
+      box-shadow: 0 0 0 8px rgba(34,197,94,0.3);
+    }
+
+    #successPanel h2 {
+      font-size: 22px;
+      margin: 0 0 8px;
+    }
+
+    #successPanel p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: var(--text-soft);
+    }
+
+    .privacy-note {
+      margin-top: 10px;
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: left;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .privacy-note strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    footer {
+      margin-top: 10px;
+      font-size: 11px;
+      text-align: left;
+      color: var(--muted);
+    }
+
+    footer strong {
+      color: var(--text-soft);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: column;
+        gap: 16px;
       }
-      .shell{padding:20px 10px;}
-      .frame{padding:18px 12px;border-radius:24px;}
-      .content{padding:16px 14px;}
-    }
-    @media (max-width:600px){
-      .row{flex-direction:column;}
-      h1{font-size:21px;}
-      .subtitle{font-size:14px;}
-      input,select,textarea{font-size:15px;}
-      .section{padding:10px 10px 8px;}
-      .btn-primary{width:100%;justify-content:center;}
-      .btn-ghost{width:100%;text-align:center;}
-      .controls-bar{flex-direction:column;align-items:stretch;}
-      footer{text-align:center;}
-      .top-header{
-        align-items:flex-start;
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding-right: 0;
+        padding-bottom: 10px;
       }
-      .hero-text{text-align:left;}
-      .hero-points{justify-content:flex-start;}
-      .progress-label{font-size:10px;}
+
+      .hero-side {
+        order: 2;
+      }
+
+      .hero-main {
+        order: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .frame {
+        padding: 16px 10px;
+        border-radius: 24px;
+      }
+
+      .content {
+        padding: 14px 12px 10px;
+      }
+
+      .site-header {
+        padding: 12px 10px 0;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .shell {
+        padding: 8px 8px 24px;
+      }
+
+      .row {
+        flex-direction: column;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      footer {
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <div class="frame">
-      <div class="content">
-        <header>
-          <div class="top-header">
-            <div class="corner-icon" aria-hidden="true">🚗</div>
-            <div class="hero-text">
-              <div class="badge">
-                <span class="badge-dot"></span>
-                <span>Aaron Grover Insurance Services</span>
-              </div>
-              <h1>Request an auto insurance quote</h1>
-              <p class="subtitle">
-                I’m Reece. This quick form usually takes 2–3 minutes. I’ll review it and reach out to you personally.
-              </p>
-              <ul class="hero-points">
-                <li><span class="hero-bullet">✓</span><span>No obligation — just a quote</span></li>
-                <li><span class="hero-bullet">✓</span><span>Personal follow-up from Reece</span></li>
-                <li><span class="hero-bullet">✓</span><span>Your details kept private & secure</span></li>
-              </ul>
-            </div>
-            <div class="corner-icon" aria-hidden="true">🏠</div>
-          </div>
-        </header>
-
-        <!-- Progress bar -->
-        <div class="progress-shell" aria-hidden="true">
-          <div class="progress-label">
-            <strong id="progressStep">Step 1 of 4</strong>
-            <span id="progressTitle">About you</span>
-          </div>
-          <div class="progress-track">
-            <div class="progress-bar" id="progressBar"></div>
+  <div class="page">
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <!-- update the src to match your icon filename in the repo -->
+          <img src="utah-rate-check-icon.png" alt="Utah Rate Check" class="brand-icon">
+          <div>
+            <div class="brand-title">Utah Rate Check</div>
+            <div class="brand-subtitle">Quick auto &amp; home insurance quotes with Reece.</div>
           </div>
         </div>
+        <div class="trust-pill">
+          <span class="trust-pill-dot"></span>
+          Quotes reviewed by a licensed Allstate agency
+        </div>
+      </div>
+    </header>
 
-        <div class="layout">
-          <aside class="sidebar" aria-label="Form steps overview">
-            <h2>What you’ll share</h2>
-            <ul class="steps">
-              <li>
-                <div class="step-index">1</div>
-                <div class="step-body">
-                  <div class="step-title">About you</div>
-                  Basic contact and address.
-                </div>
-              </li>
-              <li>
-                <div class="step-index">2</div>
-                <div class="step-body">
-                  <div class="step-title">Your vehicles</div>
-                  Year, make, model, and VIN.
-                </div>
-              </li>
-              <li>
-                <div class="step-index">3</div>
-                <div class="step-body">
-                  <div class="step-title">Driving history</div>
-                  Tickets or accidents (if any).
-                </div>
-              </li>
-              <li>
-                <div class="step-index">4</div>
-                <div class="step-body">
-                  <div class="step-title">Coverage & contact</div>
-                  What you want and how to reach you.
-                </div>
-              </li>
-            </ul>
-          </aside>
+    <main class="shell">
+      <div class="frame">
+        <div class="content">
+          <!-- HERO / INTRO -->
+          <section class="hero">
+            <div class="hero-main">
+              <div class="hero-eyebrow">QUOTE REQUEST</div>
+              <h1>Check your Utah auto &amp; home rate in about 30 seconds.</h1>
+              <p class="subtitle">
+                Answer a few quick questions below. Reece will personally review your info and send back a custom quote — no spam, no pressure.
+              </p>
+              <ul class="hero-points">
+                <li><span class="hero-check">✓</span> No call center — you work with one local agent</li>
+                <li><span class="hero-check">✓</span> We compare coverage &amp; price, not just price</li>
+                <li><span class="hero-check">✓</span> Bundle auto + home or renters for extra savings</li>
+              </ul>
+            </div>
+            <aside class="hero-side">
+              <strong>What to expect</strong>
+              You’ll fill out this secure form, then Reece will follow up by call, text, or email with options tailored to your coverage needs.
+              <br><br>
+              Typical response time: <strong>Same business day</strong>.
+            </aside>
+          </section>
 
-          <main class="main-form">
-            <!-- FORM WRAPPER -->
-            <div id="formWrapper">
-              <form id="quoteForm" autocomplete="on">
-                <!-- Section 1: About you -->
-                <section class="section" aria-labelledby="section-about" data-step="1" data-title="About you">
+          <!-- PROGRESS -->
+          <div class="progress-shell">
+            <div class="progress-label">
+              <strong id="stepLabel">Step 1 of 3</strong>
+              <span id="stepHint">Your details &amp; what you need</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+
+          <!-- LAYOUT: SIDEBAR + FORM -->
+          <div class="layout">
+            <aside class="sidebar">
+              <h2>3 quick steps</h2>
+              <ul class="steps">
+                <li>
+                  <div class="step-index" id="stepBullet1">1</div>
+                  <div class="step-body">
+                    <div class="step-title">About you</div>
+                    Basic contact info &amp; how to reach you.
+                  </div>
+                </li>
+                <li>
+                  <div class="step-index" id="stepBullet2">2</div>
+                  <div class="step-body">
+                    <div class="step-title">Vehicles</div>
+                    Details about the cars you want quoted.
+                  </div>
+                </li>
+                <li>
+                  <div class="step-index" id="stepBullet3">3</div>
+                  <div class="step-body">
+                    <div class="step-title">Home &amp; final send</div>
+                    Optional home/renters info &amp; consent.
+                  </div>
+                </li>
+              </ul>
+            </aside>
+
+            <section class="main-form">
+              <!-- MULTI-STEP FORM -->
+              <form id="quoteForm" novalidate>
+                <!-- STEP 1 -->
+                <div class="step-panel active" data-step="1">
                   <div class="section-header">
                     <div class="section-title">
                       <div class="section-title-badge">1</div>
-                      <span id="section-about">About you</span>
+                      About you
                     </div>
-                    <div class="section-tag">Basic information</div>
+                    <div class="section-tag">Takes about 30 seconds.</div>
                   </div>
                   <div class="section-body">
-                    <div class="field-group">
-                      <label for="fullName">Full name</label>
-                      <input id="fullName" name="fullName" type="text" autocomplete="name" required />
-                    </div>
-
-                    <div class="field-group">
-                      <label for="street">Street address</label>
-                      <input id="street" name="street" type="text" autocomplete="street-address" required />
-                    </div>
-
                     <div class="row">
-                      <div class="field-group col">
-                        <label for="city">City</label>
-                        <input id="city" name="city" type="text" required />
+                      <div class="col field-group">
+                        <label for="firstName">First name</label>
+                        <input id="firstName" name="firstName" autocomplete="given-name" required>
                       </div>
-                      <div class="field-group col">
-                        <label for="state">State</label>
-                        <input id="state" name="state" type="text" maxlength="2" placeholder="UT" required />
-                      </div>
-                      <div class="field-group col">
-                        <label for="zip">ZIP</label>
-                        <input id="zip" name="zip" type="text" inputmode="numeric" pattern="\d{5}(-\d{4})?" required />
+                      <div class="col field-group">
+                        <label for="lastName">Last name</label>
+                        <input id="lastName" name="lastName" autocomplete="family-name" required>
                       </div>
                     </div>
 
                     <div class="row">
-                      <div class="field-group col">
-                        <label for="dob">Date of birth</label>
-                        <input id="dob" name="dob" type="date" required />
+                      <div class="col field-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" autocomplete="email" required>
+                        <p class="field-note">We’ll send your quote details here.</p>
                       </div>
-                      <div class="field-group col">
-                        <label for="ownRent">Do you own or rent your home?</label>
-                        <select id="ownRent" name="ownRent" required>
-                          <option value="">Select one</option>
-                          <option>Own</option>
-                          <option>Rent</option>
+                      <div class="col field-group">
+                        <label for="phone">Mobile number</label>
+                        <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                        <p class="field-note">For quick questions about your quote.</p>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col field-group">
+                        <label for="zip">ZIP code</label>
+                        <input id="zip" name="zip" inputmode="numeric" maxlength="5" required>
+                      </div>
+                      <div class="col field-group">
+                        <label for="contactPreference">How do you prefer Reece contacts you?</label>
+                        <select id="contactPreference" name="contactPreference">
+                          <option value="">Choose one</option>
+                          <option value="call">Call</option>
+                          <option value="text">Text</option>
+                          <option value="email">Email</option>
+                          <option value="call_text">Call or text</option>
                         </select>
                       </div>
                     </div>
 
                     <div class="field-group">
-                      <label for="drivers">Other household drivers (if any)</label>
-                      <textarea id="drivers" name="drivers" placeholder="Names, dates of birth, and license state for anyone else who drives your vehicles."></textarea>
-                      <div class="field-note">If you’re the only driver in the household, you can leave this blank.</div>
+                      <label for="bestTime">Best time of day to reach you</label>
+                      <input id="bestTime" name="bestTime" placeholder="Morning, lunch, afternoon, or a specific time window">
+                    </div>
+
+                    <div class="field-group">
+                      <label>What would you like quoted?</label>
+                      <div class="inline-options">
+                        <label>
+                          <input type="checkbox" id="needAuto" name="needAuto" checked>
+                          Auto
+                        </label>
+                        <label>
+                          <input type="checkbox" id="needHome" name="needHome">
+                          Home / renters
+                        </label>
+                      </div>
+                      <p class="field-note">You can choose one or both — bundling often saves the most.</p>
                     </div>
                   </div>
-                </section>
+                </div>
 
-                <!-- Section 2: Vehicles (card-based) -->
-                <section class="section" aria-labelledby="section-vehicles" data-step="2" data-title="Your vehicles">
+                <!-- STEP 2 -->
+                <div class="step-panel" data-step="2">
                   <div class="section-header">
                     <div class="section-title">
                       <div class="section-title-badge">2</div>
-                      <span id="section-vehicles">Your vehicles</span>
+                      Vehicles
                     </div>
-                    <div class="section-tag">You can add more than one</div>
+                    <div class="section-tag">Tell us about the car(s) you want quoted.</div>
                   </div>
                   <div class="section-body">
                     <div class="field-group">
-                      <div class="field-note">Fill in as much as you can. VIN is helpful but not required.</div>
-                      <div class="vehicles-shell" id="vehiclesShell">
-                        <!-- vehicle cards injected here -->
+                      <label for="vehiclesSummary">What vehicles should we quote?</label>
+                      <textarea id="vehiclesSummary" name="vehiclesSummary" placeholder="Example: 2020 Honda Civic EX, 2018 Toyota Highlander Limited. Include who drives what if there are multiple drivers."></textarea>
+                    </div>
+
+                    <div class="row">
+                      <div class="col field-group">
+                        <label for="currentInsurer">Who are you currently insured with?</label>
+                        <input id="currentInsurer" name="currentInsurer" placeholder="If none, type “No current insurance”">
                       </div>
-                      <button type="button" class="btn-soft" id="addVehicleBtn">
-                        <span class="icon">+</span>
-                        <span>Add another vehicle</span>
-                      </button>
+                      <div class="col field-group">
+                        <label for="monthsInsured">How long have you been insured continuously?</label>
+                        <select id="monthsInsured" name="monthsInsured">
+                          <option value="">Select</option>
+                          <option value="0-6">0–6 months</option>
+                          <option value="6-12">6–12 months</option>
+                          <option value="12-36">1–3 years</option>
+                          <option value="36-999">3+ years</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="accidentsClaims">Any at-fault accidents, tickets, or claims in the last 3 years?</label>
+                      <textarea id="accidentsClaims" name="accidentsClaims" placeholder="A quick note is fine: “1 speeding ticket in 2023”, “rear-end accident June 2024”, etc."></textarea>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="coverageGoals">What are you hoping to accomplish with this quote?</label>
+                      <textarea id="coverageGoals" name="coverageGoals" placeholder="Examples: “Save money without cutting coverage”, “raise limits and add better protection”, “compare with current policy.”"></textarea>
                     </div>
                   </div>
-                </section>
+                </div>
 
-                <!-- Section 3: Driving history -->
-                <section class="section" aria-labelledby="section-history" data-step="3" data-title="Driving history">
+                <!-- STEP 3 -->
+                <div class="step-panel" data-step="3">
                   <div class="section-header">
                     <div class="section-title">
                       <div class="section-title-badge">3</div>
-                      <span id="section-history">Driving history</span>
+                      Home &amp; send request
                     </div>
-                    <div class="section-tag">Last 3 years</div>
+                    <div class="section-tag">Optional home/renters details + final send.</div>
                   </div>
                   <div class="section-body">
-                    <div class="row">
-                      <div class="field-group col">
-                        <label>Any tickets in the last 3 years?</label>
-                        <div class="inline-radio">
-                          <label><input type="radio" name="tickets" value="no" checked /> No</label>
-                          <label><input type="radio" name="tickets" value="yes" /> Yes</label>
+                    <div id="homeSection" class="home-extra" style="display:none;">
+                      <div class="home-extra-heading">Home / renters details (optional)</div>
+
+                      <div class="row">
+                        <div class="col field-group">
+                          <label for="homeType">Type of property</label>
+                          <select id="homeType" name="homeType">
+                            <option value="">Select</option>
+                            <option value="home">Single-family home</option>
+                            <option value="condo">Condo</option>
+                            <option value="townhome">Townhome</option>
+                            <option value="renters">Renters policy</option>
+                            <option value="landlord">Landlord / rental property</option>
+                          </select>
+                        </div>
+                        <div class="col field-group">
+                          <label for="homeYearBuilt">Year built (approximate is OK)</label>
+                          <input id="homeYearBuilt" name="homeYearBuilt" inputmode="numeric">
                         </div>
                       </div>
-                      <div class="field-group col">
-                        <label>Any accidents in the last 3 years?</label>
-                        <div class="inline-radio">
-                          <label><input type="radio" name="accidents" value="no" checked /> No</label>
-                          <label><input type="radio" name="accidents" value="yes" /> Yes</label>
+
+                      <div class="row">
+                        <div class="col field-group">
+                          <label for="homeSquareFeet">Approx. square footage</label>
+                          <input id="homeSquareFeet" name="homeSquareFeet" inputmode="numeric">
                         </div>
+                        <div class="col field-group">
+                          <label for="homeRoofYear">Approx. roof age</label>
+                          <input id="homeRoofYear" name="homeRoofYear" placeholder="Example: new in 2019">
+                        </div>
+                      </div>
+
+                      <div class="field-group">
+                        <label for="homeNotes">Anything else about the home you’d like Reece to know?</label>
+                        <textarea id="homeNotes" name="homeNotes" placeholder="Finished basement, trampoline, dogs, security system, recent updates, etc."></textarea>
                       </div>
                     </div>
 
                     <div class="field-group">
-                      <label for="violDetails">If yes, please share brief details</label>
-                      <textarea id="violDetails" name="violDetails" placeholder="Dates, what happened, and who was at fault (if known)."></textarea>
-                    </div>
-                  </div>
-                </section>
-
-                <!-- Section 4: Coverage & contact -->
-                <section class="section" aria-labelledby="section-coverage" data-step="4" data-title="Coverage & contact">
-                  <div class="section-header">
-                    <div class="section-title">
-                      <div class="section-title-badge">4</div>
-                      <span id="section-coverage">Coverage & contact</span>
-                    </div>
-                    <div class="section-tag">How I can best help</div>
-                  </div>
-                  <div class="section-body">
-                    <div class="field-group">
-                      <label>Coverages you’re interested in</label>
-                      <div class="checkbox-row">
-                        <label><input type="checkbox" name="coverage" value="Liability" /> Liability</label>
-                        <label><input type="checkbox" name="coverage" value="Collision" /> Collision</label>
-                        <label><input type="checkbox" name="coverage" value="Comprehensive" /> Comprehensive</label>
-                        <label><input type="checkbox" name="coverage" value="Uninsured/Underinsured" /> Uninsured/Underinsured</label>
-                        <label><input type="checkbox" name="coverage" value="Rental Reimbursement" /> Rental Reimbursement</label>
-                      </div>
-                      <div class="field-note">Not sure what you need? Just pick a few and I’ll walk you through options.</div>
-                    </div>
-
-                    <div class="row">
-                      <div class="field-group col">
-                        <label for="email">Email</label>
-                        <input id="email" name="email" type="email" autocomplete="email" required />
-                      </div>
-                      <div class="field-group col">
-                        <label for="phone">Phone</label>
-                        <input id="phone" name="phone" type="tel" autocomplete="tel" required />
-                      </div>
-                    </div>
-
-                    <div class="row">
-                      <div class="field-group col">
-                        <label for="contactMethod">Preferred way to contact you</label>
-                        <select id="contactMethod" name="contactMethod" required>
-                          <option value="">Select one</option>
-                          <option>Phone call</option>
-                          <option>Text message</option>
-                          <option>Email</option>
-                        </select>
-                      </div>
-                      <div class="field-group col">
-                        <label for="contactTime">Best time to reach you</label>
-                        <input id="contactTime" name="contactTime" type="text" placeholder="e.g. Weekdays after 5pm" />
-                      </div>
+                      <label for="extraNotes">Anything else you’d like to share?</label>
+                      <textarea id="extraNotes" name="extraNotes" placeholder="Timing for your renewal, specific questions, or anything you want us to prioritize."></textarea>
                     </div>
 
                     <div class="pill-consent">
-                      <input id="consent" name="consent" type="checkbox" required />
+                      <input type="checkbox" id="consent" name="consent" required>
                       <label for="consent">
-                        I consent to have <strong>Reece (Aaron Grover Insurance Services)</strong> contact me about this quote.
-                        Your information is used only to provide your quote.
+                        <strong>Consent to contact</strong>
+                        By submitting, you agree that Reece and the agency may contact you by call, text, or email about this quote. Message/data rates may apply. You can opt out at any time.
                       </label>
                     </div>
                   </div>
-                </section>
-
-                <input type="hidden" id="agentName" value="Aaron Grover Insurance Services" />
-                <input type="hidden" id="agentContact" value="Reece — 801-523-2510" />
+                </div>
 
                 <div class="controls-bar">
-                  <button type="submit" class="btn-primary" id="submitBtn">
-                    <span class="icon" id="submitIcon">→</span>
-                    <span id="submitText">Submit my quote request</span>
+                  <button type="button" class="btn-ghost" id="backBtn" hidden>Back</button>
+                  <button type="button" class="btn-primary" id="nextBtn">
+                    <span class="icon">→</span>
+                    <span id="nextBtnLabel">Next</span>
                   </button>
-                  <button type="button" class="btn-ghost" id="clearBtn">Clear form</button>
                   <div id="status"></div>
                 </div>
               </form>
-            </div>
 
-            <!-- FULL SUCCESS SCREEN -->
-            <div id="successPanel">
-              <div class="success-icon">✓</div>
-              <h2>Thank you for your request</h2>
-              <p>Your quote request has been sent successfully.</p>
-              <p>I’ll review your details and contact you using your preferred method and time.</p>
-              <p>If you need anything sooner, you can call or text me at <strong>801-523-2510</strong>.</p>
-              <button type="button" class="btn-primary" id="newQuoteBtn">
-                <span class="icon">+</span>
-                <span>Send another quote request</span>
-              </button>
-            </div>
+              <!-- SUCCESS PANEL -->
+              <div id="successPanel">
+                <div class="success-icon">✓</div>
+                <h2>Thank you — your quote request is in!</h2>
+                <p>
+                  We’ve received your information. Reece will review everything and reach out with your custom quote and any follow-up questions.
+                </p>
+                <p>
+                  If you need to update anything, you can reply directly to the quote email when it arrives.
+                </p>
+                <div class="privacy-note">
+                  <strong>Your information stays with us.</strong>
+                  We use your details only to prepare insurance quotes and recommendations. We don’t sell your information to third parties.
+                </div>
+              </div>
 
-            <div class="privacy-note">
-              <strong>Privacy &amp; security</strong>
-              <p>Your details are sent over an encrypted connection and delivered securely to our office email. We use this information only to provide your insurance quote and to contact you. We do not sell your information.</p>
-            </div>
-
-            <footer>
-              Questions before you fill this out? Call or text Reece at <strong>801-523-2510</strong>.
-            </footer>
-          </main>
+              <footer>
+                <p>
+                  <strong>Utah Rate Check</strong> – quote requests reviewed by a licensed Allstate agency.
+                  This form does not bind or change coverage. Quotes are subject to underwriting guidelines.
+                </p>
+              </footer>
+            </section>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   </div>
 
   <script>
-    const WORKER_URL = 'https://auto-quote-worker.p-reece159.workers.dev/quote';
+    // === CONFIG ===
+    // Update this if your worker URL is different:
+    const WORKER_URL = "https://auto-quote-worker.p-reece159.workers.dev/";
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('quoteForm');
-      const formWrapper = document.getElementById('formWrapper');
-      const statusEl = document.getElementById('status');
-      const clearBtn = document.getElementById('clearBtn');
-      const vehiclesShell = document.getElementById('vehiclesShell');
-      const addVehicleBtn = document.getElementById('addVehicleBtn');
-      const submitBtn = document.getElementById('submitBtn');
-      const submitText = document.getElementById('submitText');
-      const submitIcon = document.getElementById('submitIcon');
-      const successPanel = document.getElementById('successPanel');
-      const newQuoteBtn = document.getElementById('newQuoteBtn');
-      const stateInput = document.getElementById('state');
+    const totalSteps = 3;
+    let currentStep = 1;
 
-      const progressBar = document.getElementById('progressBar');
-      const progressStep = document.getElementById('progressStep');
-      const progressTitle = document.getElementById('progressTitle');
-      const sections = Array.from(document.querySelectorAll('section.section'));
+    const stepPanels = document.querySelectorAll(".step-panel");
+    const progressBar = document.getElementById("progressBar");
+    const stepLabel = document.getElementById("stepLabel");
+    const stepHint = document.getElementById("stepHint");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const nextBtnLabel = document.getElementById("nextBtnLabel");
+    const statusEl = document.getElementById("status");
+    const successPanel = document.getElementById("successPanel");
+    const form = document.getElementById("quoteForm");
+    const stepBullets = [
+      document.getElementById("stepBullet1"),
+      document.getElementById("stepBullet2"),
+      document.getElementById("stepBullet3")
+    ];
+    const needHomeCheckbox = document.getElementById("needHome");
+    const homeSection = document.getElementById("homeSection");
 
-      // --- Helper: progress bar ---
-      function updateProgressForSection(sectionEl){
-        const step = Number(sectionEl.dataset.step || 1);
-        const title = sectionEl.dataset.title || '';
-        const total = 4;
-        const pct = (step / total) * 100;
-        progressBar.style.width = pct + '%';
-        progressStep.textContent = `Step ${step} of ${total}`;
-        progressTitle.textContent = title;
-      }
-
-      // Focus-based step tracking
-      form.addEventListener('focusin', (e) => {
-        const sec = e.target.closest('section.section');
-        if(sec) updateProgressForSection(sec);
+    function updateStepUI() {
+      stepPanels.forEach(panel => {
+        const s = Number(panel.dataset.step);
+        panel.classList.toggle("active", s === currentStep);
       });
 
-      // initial
-      if (sections.length) updateProgressForSection(sections[0]);
-
-      // --- Vehicles ---
-      function createVehicleCard(index){
-        const card = document.createElement('div');
-        card.className = 'vehicle-card';
-        card.dataset.index = index;
-
-        card.innerHTML = `
-          <div class="vehicle-header">
-            <div class="vehicle-tag">
-              <span class="vehicle-dot"></span>
-              <span>Vehicle ${index + 1}</span>
-            </div>
-            <button type="button" class="chip-remove">Remove</button>
-          </div>
-          <div class="vehicle-fields">
-            <div class="row">
-              <div class="field-group col">
-                <label>Year</label>
-                <input type="text" name="vehicle_year_${index}" placeholder="2018" />
-              </div>
-              <div class="field-group col">
-                <label>Make</label>
-                <input type="text" name="vehicle_make_${index}" placeholder="Toyota" />
-              </div>
-              <div class="field-group col">
-                <label>Model</label>
-                <input type="text" name="vehicle_model_${index}" placeholder="Camry" />
-              </div>
-            </div>
-            <div class="field-group" style="margin-top:6px;">
-              <label>VIN (optional)</label>
-              <input type="text" name="vehicle_vin_${index}" placeholder="Vehicle Identification Number" />
-            </div>
-          </div>
-        `;
-
-        const removeBtn = card.querySelector('.chip-remove');
-        removeBtn.addEventListener('click', () => {
-          const allCards = document.querySelectorAll('.vehicle-card');
-          if(allCards.length > 1){
-            card.remove();
-            renumberVehicleCards();
-          }
-        });
-
-        return card;
-      }
-
-      function renumberVehicleCards(){
-        const cards = document.querySelectorAll('.vehicle-card');
-        cards.forEach((card, idx) => {
-          card.dataset.index = idx;
-          card.querySelector('.vehicle-tag span:nth-child(2)').textContent = 'Vehicle ' + (idx + 1);
-          card.querySelector('input[name^="vehicle_year_"]').setAttribute('name','vehicle_year_' + idx);
-          card.querySelector('input[name^="vehicle_make_"]').setAttribute('name','vehicle_make_' + idx);
-          card.querySelector('input[name^="vehicle_model_"]').setAttribute('name','vehicle_model_' + idx);
-          card.querySelector('input[name^="vehicle_vin_"]').setAttribute('name','vehicle_vin_' + idx);
-        });
-      }
-
-      function addInitialVehicle(){
-        if(!vehiclesShell) return;
-        vehiclesShell.innerHTML = '';
-        vehiclesShell.appendChild(createVehicleCard(0));
-      }
-
-      if(addVehicleBtn){
-        addVehicleBtn.addEventListener('click', () => {
-          const count = document.querySelectorAll('.vehicle-card').length;
-          vehiclesShell.appendChild(createVehicleCard(count));
-        });
-      }
-
-      // --- QoL: auto-uppercase state ---
-      if(stateInput){
-        stateInput.addEventListener('input', () => {
-          stateInput.value = stateInput.value.toUpperCase();
-        });
-      }
-
-      // --- Helpers ---
-      function getCheckedValues(name) {
-        return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked'))
-          .map(cb => cb.value);
-      }
-
-      function gatherPayload() {
-        const data = {
-          fullName: document.getElementById('fullName').value.trim(),
-          street: document.getElementById('street').value.trim(),
-          city: document.getElementById('city').value.trim(),
-          state: document.getElementById('state').value.trim(),
-          zip: document.getElementById('zip').value.trim(),
-          dob: document.getElementById('dob').value,
-          ownRent: document.getElementById('ownRent').value,
-          drivers: document.getElementById('drivers').value.trim(),
-          tickets: (document.querySelector('input[name="tickets"]:checked') || {}).value || '',
-          accidents: (document.querySelector('input[name="accidents"]:checked') || {}).value || '',
-          violDetails: document.getElementById('violDetails').value.trim(),
-          email: document.getElementById('email').value.trim(),
-          phone: document.getElementById('phone').value.trim(),
-          contactMethod: document.getElementById('contactMethod').value,
-          contactTime: document.getElementById('contactTime').value.trim(),
-          coverages: getCheckedValues('coverage'),
-          consent: document.getElementById('consent').checked,
-          agentName: document.getElementById('agentName').value,
-          agentContact: document.getElementById('agentContact').value,
-          vehicles: [],
-          // Hint for the worker so it can send a customer confirmation email
-          sendConfirmationToCustomer: true
-        };
-
-        // collect vehicles from cards
-        document.querySelectorAll('.vehicle-card').forEach(card => {
-          const idx = card.dataset.index;
-          const year = (card.querySelector(`input[name="vehicle_year_${idx}"]`)?.value || '').trim();
-          const make = (card.querySelector(`input[name="vehicle_make_${idx}"]`)?.value || '').trim();
-          const model = (card.querySelector(`input[name="vehicle_model_${idx}"]`)?.value || '').trim();
-          const vin = (card.querySelector(`input[name="vehicle_vin_${idx}"]`)?.value || '').trim();
-          if (year || make || model || vin) {
-            data.vehicles.push({ year, make, model, vin });
-          }
-        });
-
-        return data;
-      }
-
-      // Clear error style as user types
-      form.addEventListener('input', (e) => {
-        if(e.target.classList.contains('input-error')){
-          e.target.classList.remove('input-error');
+      for (let i = 0; i < stepBullets.length; i++) {
+        if (i + 1 < currentStep) {
+          stepBullets[i].classList.add("done");
+        } else {
+          stepBullets[i].classList.remove("done");
         }
-      });
+      }
 
-      // Required fields and error highlighting
-      function validateRequired(payload){
-        let valid = true;
-        const requiredIds = ['fullName','street','city','state','zip','dob','ownRent','email','phone','contactMethod'];
+      const pct = (currentStep - 1) / (totalSteps - 1) * 100;
+      progressBar.style.width = pct + "%";
+
+      stepLabel.textContent = `Step ${currentStep} of ${totalSteps}`;
+      if (currentStep === 1) {
+        stepHint.textContent = "Your details & what you need";
+      } else if (currentStep === 2) {
+        stepHint.textContent = "Vehicles for your quote";
+      } else {
+        stepHint.textContent = "Home details (optional) & send request";
+      }
+
+      backBtn.hidden = currentStep === 1;
+      if (currentStep === totalSteps) {
+        nextBtnLabel.textContent = "Submit quote request";
+        nextBtn.querySelector(".icon").textContent = "✓";
+      } else {
+        nextBtnLabel.textContent = "Next";
+        nextBtn.querySelector(".icon").textContent = "→";
+      }
+    }
+
+    function showHomeSectionIfNeeded() {
+      homeSection.style.display = needHomeCheckbox.checked ? "block" : "none";
+    }
+
+    needHomeCheckbox.addEventListener("change", showHomeSectionIfNeeded);
+    showHomeSectionIfNeeded();
+
+    backBtn.addEventListener("click", () => {
+      if (currentStep > 1) {
+        currentStep--;
+        statusEl.textContent = "";
+        updateStepUI();
+      }
+    });
+
+    nextBtn.addEventListener("click", async () => {
+      statusEl.className = "";
+      statusEl.textContent = "";
+      clearFieldErrors();
+
+      if (!validateCurrentStep()) {
+        return;
+      }
+
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStepUI();
+        return;
+      }
+
+      // Last step -> submit
+      await submitForm();
+    });
+
+    function clearFieldErrors() {
+      form.querySelectorAll(".input-error").forEach(el => {
+        el.classList.remove("input-error");
+      });
+    }
+
+    function markError(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add("input-error");
+    }
+
+    function validateCurrentStep() {
+      let valid = true;
+
+      if (currentStep === 1) {
+        const requiredIds = ["firstName", "lastName", "email", "phone", "zip"];
         requiredIds.forEach(id => {
           const el = document.getElementById(id);
-          if(!el) return;
-          const value = (el.value || '').trim();
-          if(!value){
-            el.classList.add('input-error');
+          if (!el || !el.value.trim()) {
+            markError(id);
             valid = false;
-          }else{
-            el.classList.remove('input-error');
           }
         });
-        const consent = document.getElementById('consent');
-        if(!consent.checked){
-          consent.classList.add('input-error');
+
+        const emailVal = document.getElementById("email").value.trim();
+        if (emailVal && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailVal)) {
+          markError("email");
           valid = false;
-        }else{
-          consent.classList.remove('input-error');
-        }
-        return valid;
-      }
-
-      // Button sending state
-      function setSending(isSending){
-        if(isSending){
-          submitBtn.disabled = true;
-          submitBtn.classList.add('sending');
-          submitText.textContent = 'Sending…';
-          submitIcon.textContent = '⏳';
-        }else{
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('sending');
-          submitText.textContent = 'Submit my quote request';
-          submitIcon.textContent = '→';
         }
       }
 
-      // Submit
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        statusEl.textContent = '';
-        statusEl.classList.remove('error','success');
+      if (currentStep === 3) {
+        const consent = document.getElementById("consent");
+        if (!consent.checked) {
+          markError("consent");
+          valid = false;
+          statusEl.className = "error";
+          statusEl.textContent = "Please check the consent box so we can contact you about your quote.";
+        }
+      }
 
-        const data = gatherPayload();
+      if (!valid && !statusEl.textContent) {
+        statusEl.className = "error";
+        statusEl.textContent = "Please complete the highlighted fields before continuing.";
+      }
 
-        if (!validateRequired(data)) {
-          statusEl.textContent = 'Please complete the highlighted fields.';
-          statusEl.classList.add('error');
-          return;
+      return valid;
+    }
+
+    async function submitForm() {
+      nextBtn.disabled = true;
+      backBtn.disabled = true;
+      nextBtn.classList.add("sending");
+      statusEl.className = "";
+      statusEl.textContent = "Sending your quote request securely…";
+
+      const formData = new FormData(form);
+
+      const payload = {
+        // core identity
+        firstName: formData.get("firstName") || "",
+        lastName: formData.get("lastName") || "",
+        email: formData.get("email") || "",
+        phone: formData.get("phone") || "",
+        zip: formData.get("zip") || "",
+        contactPreference: formData.get("contactPreference") || "",
+        bestTime: formData.get("bestTime") || "",
+
+        // interests
+        needAuto: formData.get("needAuto") === "on",
+        needHome: formData.get("needHome") === "on",
+
+        // auto section
+        vehiclesSummary: formData.get("vehiclesSummary") || "",
+        currentInsurer: formData.get("currentInsurer") || "",
+        monthsInsured: formData.get("monthsInsured") || "",
+        accidentsClaims: formData.get("accidentsClaims") || "",
+        coverageGoals: formData.get("coverageGoals") || "",
+
+        // home section
+        homeType: formData.get("homeType") || "",
+        homeYearBuilt: formData.get("homeYearBuilt") || "",
+        homeSquareFeet: formData.get("homeSquareFeet") || "",
+        homeRoofYear: formData.get("homeRoofYear") || "",
+        homeNotes: formData.get("homeNotes") || "",
+
+        // extra
+        extraNotes: formData.get("extraNotes") || "",
+        consent: formData.get("consent") === "on",
+        source: "utahratecheck.com"
+      };
+
+      try {
+        const res = await fetch(WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+          throw new Error("Request failed with status " + res.status);
         }
 
-        setSending(true);
-        statusEl.textContent = 'Sending…';
+        // If the worker returns JSON, you could read it here:
+        // const data = await res.json();
 
-        try {
-          const res = await fetch(WORKER_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          });
+        form.style.display = "none";
+        successPanel.classList.add("active");
+        statusEl.className = "success";
+        statusEl.textContent = "";
+      } catch (err) {
+        console.error(err);
+        statusEl.className = "error";
+        statusEl.textContent = "Something went wrong sending your quote. Please try again in a moment or contact Reece directly.";
+      } finally {
+        nextBtn.disabled = false;
+        backBtn.disabled = false;
+        nextBtn.classList.remove("sending");
+      }
+    }
 
-          if (res.ok) {
-            form.reset();
-            addInitialVehicle();
-            setSending(false);
-            statusEl.textContent = '';
-            statusEl.classList.remove('error');
-            statusEl.classList.add('success');
-
-            // show full success screen
-            formWrapper.style.display = 'none';
-            successPanel.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          } else {
-            setSending(false);
-            statusEl.textContent = 'There was an issue sending your request. Please try again or text 801-523-2510.';
-            statusEl.classList.add('error');
-          }
-        } catch (err) {
-          console.error(err);
-          setSending(false);
-          statusEl.textContent = 'Network error. Please try again or text 801-523-2510.';
-          statusEl.classList.add('error');
-        }
-      });
-
-      clearBtn.addEventListener('click', () => {
-        if (confirm('Clear the form?')) {
-          form.reset();
-          addInitialVehicle();
-          statusEl.textContent = '';
-          statusEl.classList.remove('error','success');
-        }
-      });
-
-      newQuoteBtn.addEventListener('click', () => {
-        successPanel.style.display = 'none';
-        formWrapper.style.display = 'block';
-        form.reset();
-        addInitialVehicle();
-        statusEl.textContent = '';
-        statusEl.classList.remove('error','success');
-        if (sections.length) updateProgressForSection(sections[0]);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-
-      // start with one vehicle card
-      addInitialVehicle();
-    });
+    // Initialize
+    updateStepUI();
   </script>
 </body>
 </html>
